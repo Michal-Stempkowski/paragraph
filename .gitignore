@@ -1,0 +1,5 @@
+/DataLayer/bin/Debug/*.dll
+/DataLayer/bin/Debug
+/DataLayer/obj/Debug
+/Tests/bin/Debug
+/Tests/obj/Debug
