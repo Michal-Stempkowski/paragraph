@@ -1,4 +1,5 @@
 ﻿using System;
+using DataLayer.Data;
 using DataLayer.Exceptions;
 using DataLayer.Logic;
 using DataLayer.Room;
@@ -12,12 +13,12 @@ namespace Tests
         private const string NotExistingRoomFile = @"path/to/not_existing_room.room";
         private IRoomDataProvider _sut;
         private IStateManager _stateManager;
-        private IJsonObjectProvider _objectProvider;
+        private IDaoProvider _objectProvider;
 
         [SetUp]
         public void SetUp()
         {
-            _objectProvider = Substitute.For<IJsonObjectProvider>();
+            _objectProvider = Substitute.For<IDaoProvider>();
             _sut = new RoomDataProvider(_objectProvider);
             _stateManager = Substitute.For<IStateManager>();
 

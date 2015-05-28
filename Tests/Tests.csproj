@@ -47,6 +47,7 @@
     <Compile Include="DecisionTests.cs" />
     <Compile Include="EntityDataProviderTests.cs" />
     <Compile Include="EntityMenuTests.cs" />
+    <Compile Include="JsonDaoProviderTests.cs" />
     <Compile Include="RoomDataProviderTests.cs" />
     <Compile Include="SanityCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
