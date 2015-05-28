@@ -17,19 +17,31 @@ namespace DataLayer
             _stateManager = stateManager;
         }
 
-        public string ShowDescritptionBarContent()
+        public string DescritptionBarContent
         {
-            return _provider.GetDescriptionBarContent();
+            get
+            {
+                var currentRoom = _provider.CurrentRoom;
+                return currentRoom.Description; 
+                
+            }
         }
 
         public IList<IDecision> GetAvailableDecisions()
         {
-            return _provider.GetAvailableDecisions(_stateManager);
+            var currentRoom = _provider.CurrentRoom;
+            return currentRoom.Decisions;
         }
 
-        public bool Decide(IDecision decision)
+        public void Decide(IDecision decision)
         {
-            throw new NotImplementedException();
+            decision.Effect(_stateManager);
+            PerformTransition(decision.Path);
+        }
+
+        public void PerformTransition(string path)
+        {
+            _provider.PerformRoomTransition(path, _stateManager);
         }
     }
 }

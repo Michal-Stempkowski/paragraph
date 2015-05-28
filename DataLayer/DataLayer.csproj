@@ -45,6 +45,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Decision.cs" />
     <Compile Include="IDecision.cs" />
+    <Compile Include="IRoom.cs" />
     <Compile Include="IRoomDataProvider.cs" />
     <Compile Include="IStateManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

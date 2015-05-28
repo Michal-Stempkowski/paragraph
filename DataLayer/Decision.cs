@@ -24,5 +24,7 @@ namespace DataLayer
         }
 
         public Action<IStateManager> Effect { get; set; }
+
+        public string Path { get; set; }
     }
 }

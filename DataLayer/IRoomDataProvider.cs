@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace DataLayer
+﻿namespace DataLayer
 {
     public interface IRoomDataProvider
     {
-        string GetDescriptionBarContent();
-        IList<IDecision> GetAvailableDecisions(IStateManager stateManager);
+        void PerformRoomTransition(string decision, IStateManager stateManager);
+        IRoom CurrentRoom { get; }
     }
 }
