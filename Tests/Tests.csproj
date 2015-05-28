@@ -45,7 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DecisionTests.cs" />
-    <Compile Include="RoomMenuTests.cs" />
+    <Compile Include="EntityDataProviderTests.cs" />
+    <Compile Include="EntityMenuTests.cs" />
     <Compile Include="SanityCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

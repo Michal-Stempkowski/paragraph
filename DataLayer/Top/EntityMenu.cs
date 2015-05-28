@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using DataLayer.Logic;
 
-namespace DataLayer
+namespace DataLayer.Top
 {
-    public class RoomMenu
+    public class EntityMenu
     {
-        private readonly IRoomDataProvider _provider;
+        private readonly IEntityDataProvider _provider;
         private readonly IStateManager _stateManager;
 
-        public RoomMenu(IRoomDataProvider provider, IStateManager stateManager)
+        public EntityMenu(IEntityDataProvider provider, IStateManager stateManager)
         {
             _provider = provider;
             _stateManager = stateManager;
@@ -21,7 +18,7 @@ namespace DataLayer
         {
             get
             {
-                var currentRoom = _provider.CurrentRoom;
+                var currentRoom = _provider.CurrentEntity;
                 return currentRoom.Description; 
                 
             }
@@ -29,19 +26,19 @@ namespace DataLayer
 
         public IList<IDecision> GetAvailableDecisions()
         {
-            var currentRoom = _provider.CurrentRoom;
+            var currentRoom = _provider.CurrentEntity;
             return currentRoom.Decisions;
         }
 
         public void Decide(IDecision decision)
         {
             decision.Effect(_stateManager);
-            PerformTransition(decision.Path);
+            PerformTransition(decision.Destination);
         }
 
         public void PerformTransition(string path)
         {
-            _provider.PerformRoomTransition(path, _stateManager);
+            _provider.PerformEntityTransition(path, _stateManager);
         }
     }
 }

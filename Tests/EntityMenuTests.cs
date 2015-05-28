@@ -1,39 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using DataLayer;
+﻿using System.Collections.Generic;
+using DataLayer.Logic;
+using DataLayer.Top;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace Tests
 {
-    [TestFixture]
-    class RoomMenuTests
+    class EntityMenuTests
     {
         private const string CurrentRoomDescription = "Current room description.";
-        private const string _decisionPath = @"AMN/NORTHERN/TAVERN/GUILDMASTER_TALK00";
-        private readonly IRoomDataProvider _provider;
-        private readonly IStateManager _stateManager;
-        private readonly RoomMenu _sut;
-        private readonly IDecision _decision;
-        private readonly IRoom _currentRoom;
+        private const string DecisionPath = @"AMN/NORTHERN/TAVERN/GUILDMASTER_TALK00";
+        private IEntityDataProvider _provider;
+        private IStateManager _stateManager;
+        private EntityMenu _sut;
+        private IDecision _decision;
+        private IEntity _currentEntity;
 
-        public RoomMenuTests()
+        [SetUp]
+        public void SetUp()
         {
-            _provider = Substitute.For<IRoomDataProvider>();
+            _provider = Substitute.For<IEntityDataProvider>();
             _stateManager = Substitute.For<IStateManager>();
-            _sut = new RoomMenu(_provider, _stateManager);
+            _sut = new EntityMenu(_provider, _stateManager);
             _decision = Substitute.For<IDecision>();
-            _currentRoom = Substitute.For<IRoom>();
+            _currentEntity = Substitute.For<IEntity>();
 
-            _provider.CurrentRoom.Returns(_currentRoom);
-            _currentRoom.Description.Returns(CurrentRoomDescription);
+            _provider.CurrentEntity.Returns(_currentEntity);
+            _currentEntity.Description.Returns(CurrentRoomDescription);
             
 
             var availableDecisions = new List<IDecision> { _decision };
 
-            _currentRoom.Decisions.Returns(availableDecisions);
+            _currentEntity.Decisions.Returns(availableDecisions);
 
-            _decision.Path.Returns(_decisionPath);
+            _decision.Destination.Returns(DecisionPath);
         }
 
         [Test]
@@ -51,9 +51,9 @@ namespace Tests
         [Test]
         public void should_handle_proper_room_transition_well()
         {
-            _sut.PerformTransition(_decisionPath);
+            _sut.PerformTransition(DecisionPath);
 
-            _provider.Received().PerformRoomTransition(_decisionPath, _stateManager);
+            _provider.Received().PerformEntityTransition(DecisionPath, _stateManager);
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace Tests
 
             _sut.Decide(_decision);
 
-            _provider.Received().PerformRoomTransition(_decisionPath, _stateManager);
+            _provider.Received().PerformEntityTransition(DecisionPath, _stateManager);
             Assert.That(result, Is.EqualTo(expectedResult));
             
         }

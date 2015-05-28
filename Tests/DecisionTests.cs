@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using DataLayer;
+﻿using DataLayer.Logic;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace Tests
 {
-    [TestFixture]
     class DecisionTests
     {
-        private readonly IDecision _sut;
+        private IDecision _sut;
 
-        public DecisionTests()
+        [SetUp]
+        public void SetUp()
         {
             _sut = new Decision();
         }
@@ -41,7 +35,7 @@ namespace Tests
         {
             Assert.That(_sut.Description, Is.EqualTo(""));
 
-            var description = "This is description";
+            const string description = "This is description";
 
             _sut.Description = description;
             Assert.That(_sut.Description, Is.EqualTo(description));
@@ -52,7 +46,7 @@ namespace Tests
         {
             Assert.That(_sut.Destination, Is.EqualTo(""));
 
-            var destination = "AMN//NORTHERN//TAVERN//GUILDMASTER_TALK00";
+            const string destination = "AMN//NORTHERN//TAVERN//GUILDMASTER_TALK00";
 
             _sut.Destination = destination;
             Assert.That(_sut.Destination, Is.EqualTo(destination));
@@ -67,7 +61,7 @@ namespace Tests
 
             Assert.That(result, Is.Empty);
 
-            var expectedResult = "expected";
+            const string expectedResult = "expected";
             _sut.Effect = x => result = expectedResult;
 
             var stateManager = Substitute.For<IStateManager>();

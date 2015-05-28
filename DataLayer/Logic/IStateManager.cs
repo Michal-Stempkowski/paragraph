@@ -1,4 +1,4 @@
-namespace DataLayer
+namespace DataLayer.Logic
 {
     public interface IStateManager
     {

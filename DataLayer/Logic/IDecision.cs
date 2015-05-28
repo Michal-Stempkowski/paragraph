@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataLayer
+namespace DataLayer.Logic
 {
     public interface IDecision
     {
@@ -9,6 +9,5 @@ namespace DataLayer
         string Destination { get; set; }
         Action<IStateManager> NoEffect { get; }
         Action<IStateManager> Effect { get; set; }
-        string Path { get; set; }
     }
 }

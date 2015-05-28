@@ -43,17 +43,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Decision.cs" />
-    <Compile Include="IDecision.cs" />
-    <Compile Include="IRoom.cs" />
-    <Compile Include="IRoomDataProvider.cs" />
-    <Compile Include="IStateManager.cs" />
+    <Compile Include="Exceptions\LoadFailedException.cs" />
+    <Compile Include="Room\IRoomDataProvider.cs" />
+    <Compile Include="Logic\Decision.cs" />
+    <Compile Include="Logic\IDecision.cs" />
+    <Compile Include="Logic\IEntity.cs" />
+    <Compile Include="Logic\IEntityDataProvider.cs" />
+    <Compile Include="Logic\IStateManager.cs" />
+    <Compile Include="Logic\EntityDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoomMenu.cs" />
+    <Compile Include="Room\RoomDataProvider.cs" />
+    <Compile Include="Top\EntityMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
