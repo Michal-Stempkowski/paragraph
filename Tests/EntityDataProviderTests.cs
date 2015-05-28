@@ -8,9 +8,9 @@ namespace Tests
 {
     class EntityDataProviderTests
     {
-        private const string InvalidPath = "path/to/not/existing/file";
-        private const string RoomPath = "path/to/room.room";
-        private const string NotExistingRoomPath = "path/to/not_existing_room.room";
+        private const string InvalidPath = @"path/to/not/existing/file";
+        private const string RoomPath = @"path/to/room.room";
+        private const string NotExistingRoomPath = @"path/to/not_existing_room.room";
         private IEntityDataProvider _sut;
         private IStateManager _stateManager;
         private IRoomDataProvider _roomDataProvider;

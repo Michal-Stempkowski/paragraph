@@ -43,6 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Data\IJsonObjectProvider.cs" />
+    <Compile Include="Data\IRoom.cs" />
+    <Compile Include="Exceptions\FileDoesNotExist.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
     <Compile Include="Room\IRoomDataProvider.cs" />
     <Compile Include="Logic\Decision.cs" />
