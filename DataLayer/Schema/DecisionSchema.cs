@@ -10,5 +10,6 @@ namespace DataLayer.Schema
     {
         public string Description { get; set; }
         public string Destination { get; set; }
+        public BoolExpandableExpression VisibilityRequirements { get; set; }
     }
 }

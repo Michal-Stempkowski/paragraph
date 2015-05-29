@@ -53,7 +53,11 @@
     <Compile Include="Data\IDaoProvider.cs" />
     <Compile Include="Data\IRoom.cs" />
     <Compile Include="Data\JsonDaoProvider.cs" />
+    <Compile Include="Schema\BoolExpandableExpression.cs" />
     <Compile Include="Schema\DecisionSchema.cs" />
+    <Compile Include="Schema\ExpressionOr.cs" />
+    <Compile Include="Schema\ExpressionTrue.cs" />
+    <Compile Include="Schema\ExpressionVariableExists.cs" />
     <Compile Include="Schema\RoomSchema.cs" />
     <Compile Include="Exceptions\FileDoesNotExist.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />

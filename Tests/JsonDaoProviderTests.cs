@@ -16,6 +16,7 @@ namespace Tests
         private IStorageSupervisor _storageSupervisor;
         private DecisionSchema _decision1;
         private DecisionSchema _decision2;
+
         private const string SampleRoomName = "SampleRoomName";
         private const string SampleRoomDescription = "This is a sample description.";
 
@@ -25,13 +26,13 @@ namespace Tests
         private const string SampleDecision1Destination = @"path/for/new_room.room";
         private const string SampleDecision2Destination = @"path/for/example_room.room";
 
+        private const string DefaultVariable = "TestVariable";
+
         [SetUp]
         public void SetUp()
         {
             _storageSupervisor = Substitute.For<IStorageSupervisor>();
-            _room = new RoomSchema();
-            _room.Name = SampleRoomName;
-            _room.Description = SampleRoomDescription;
+            _room = new RoomSchema {Name = SampleRoomName, Description = SampleRoomDescription};
 
             _decision1 = CreateDecision(SampleDecision1Description, SampleDecision1Destination);
             _decision2 = CreateDecision(SampleDecision2Description, SampleDecision2Destination);
@@ -44,7 +45,15 @@ namespace Tests
 
         private static DecisionSchema CreateDecision(string description, string destination)
         {
-            return new DecisionSchema {Description = description, Destination = destination};
+            return new DecisionSchema
+            {
+                Description = description, 
+                Destination = destination, 
+                VisibilityRequirements = new ExpressionOr{Args = new List<BoolExpandableExpression>
+                {
+                    new ExpressionVariableExists(DefaultVariable), new ExpressionTrue()
+                }}
+            };
         }
 
         [Test]
@@ -67,6 +76,10 @@ namespace Tests
         {
             Assert.That(convertedBack.Decisions[index].Description, Is.EqualTo(description));
             Assert.That(convertedBack.Decisions[index].Destination, Is.EqualTo(destination));
+            Assert.That(convertedBack.Decisions[index].VisibilityRequirements.Name, Is.EqualTo(new ExpressionOr().Name));
+            Assert.That(convertedBack.Decisions[index].VisibilityRequirements.Args[0].Name, Is.EqualTo(new ExpressionVariableExists().Name));
+            Assert.That(convertedBack.Decisions[index].VisibilityRequirements.Args[0].SimpleArgs[0], Is.EqualTo(DefaultVariable));
+            Assert.That(convertedBack.Decisions[index].VisibilityRequirements.Args[1].Name, Is.EqualTo(new ExpressionTrue().Name));
         }
     }
 }
