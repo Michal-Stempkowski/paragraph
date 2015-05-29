@@ -22,6 +22,9 @@ namespace Tests
         private const string SampleDecision1Description = "Decision no 1";
         private const string SampleDecision2Description = "Decision no 2";
 
+        private const string SampleDecision1Destination = @"path/for/new_room.room";
+        private const string SampleDecision2Destination = @"path/for/example_room.room";
+
         [SetUp]
         public void SetUp()
         {
@@ -30,15 +33,18 @@ namespace Tests
             _room.Name = SampleRoomName;
             _room.Description = SampleRoomDescription;
 
-            _decision1 = new DecisionSchema();
-            _decision1.Description = SampleDecision1Description;
-            _decision2 = new DecisionSchema();
-            _decision2.Description = SampleDecision2Description;
+            _decision1 = CreateDecision(SampleDecision1Description, SampleDecision1Destination);
+            _decision2 = CreateDecision(SampleDecision2Description, SampleDecision2Destination);
 
             _room.Decisions = new List<DecisionSchema>{ _decision1, _decision2 };
 
             _typedSut = new JsonDaoProvider(_storageSupervisor);
             _sut = _typedSut;
+        }
+
+        private static DecisionSchema CreateDecision(string description, string destination)
+        {
+            return new DecisionSchema {Description = description, Destination = destination};
         }
 
         [Test]
@@ -53,8 +59,14 @@ namespace Tests
             RoomSchema convertedBack = _sut.ReadRoom(ValidRoomPath);
             Assert.That(convertedBack.Name, Is.EqualTo(SampleRoomName));
             Assert.That(convertedBack.Description, Is.EqualTo(SampleRoomDescription));
-            Assert.That(convertedBack.Decisions[0].Description, Is.EqualTo(SampleDecision1Description));
-            Assert.That(convertedBack.Decisions[1].Description, Is.EqualTo(SampleDecision2Description));
+            AssertDecision(convertedBack, 0, SampleDecision1Description, SampleDecision1Destination);
+            AssertDecision(convertedBack, 1, SampleDecision2Description, SampleDecision2Destination);
+        }
+
+        private static void AssertDecision(RoomSchema convertedBack, int index, string description, string destination)
+        {
+            Assert.That(convertedBack.Decisions[index].Description, Is.EqualTo(description));
+            Assert.That(convertedBack.Decisions[index].Destination, Is.EqualTo(destination));
         }
     }
 }

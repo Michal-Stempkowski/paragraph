@@ -9,5 +9,6 @@ namespace DataLayer.Schema
     public class DecisionSchema : ISchema
     {
         public string Description { get; set; }
+        public string Destination { get; set; }
     }
 }
