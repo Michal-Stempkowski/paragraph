@@ -50,12 +50,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Core\CoreTranslator.cs" />
     <Compile Include="Data\IDaoProvider.cs" />
     <Compile Include="Data\IRoom.cs" />
     <Compile Include="Data\JsonDaoProvider.cs" />
+    <Compile Include="Core\ICoreTranslator.cs" />
     <Compile Include="Schema\BoolExpandableExpression.cs" />
+    <Compile Include="Schema\BoolTranslatableAttribute.cs" />
     <Compile Include="Schema\DecisionSchema.cs" />
+    <Compile Include="Schema\ExpressionAnd.cs" />
     <Compile Include="Schema\ExpressionOr.cs" />
+    <Compile Include="Schema\ExpressionFalse.cs" />
     <Compile Include="Schema\ExpressionTrue.cs" />
     <Compile Include="Schema\ExpressionVariableExists.cs" />
     <Compile Include="Schema\RoomSchema.cs" />

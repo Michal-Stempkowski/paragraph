@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreTranslatorTests.cs" />
     <Compile Include="DecisionTests.cs" />
     <Compile Include="EntityDataProviderTests.cs" />
     <Compile Include="EntityMenuTests.cs" />

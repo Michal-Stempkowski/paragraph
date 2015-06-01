@@ -12,6 +12,7 @@ namespace DataLayer.Top
         {
             _provider = provider;
             _stateManager = stateManager;
+
         }
 
         public string DescritptionBarContent

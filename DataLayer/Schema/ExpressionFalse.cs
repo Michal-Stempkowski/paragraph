@@ -8,11 +8,11 @@ using DataLayer.Logic;
 namespace DataLayer.Schema
 {
     [BoolTranslatable]
-    public class ExpressionOr : BoolExpandableExpressionImpl<ExpressionOr>
+    public class ExpressionFalse : BoolExpandableExpressionImpl<ExpressionFalse>
     {
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            return expr.Args.Aggregate(false, (currentState, x) => currentState || x.TranslateToBool(x, stateManager));
+            return false;
         }
     }
 }
