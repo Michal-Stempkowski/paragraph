@@ -7,7 +7,8 @@ using DataLayer.Logic;
 
 namespace DataLayer.Schema
 {
-    public class ExpressionVariableExists : BoolExpandableExpression
+    [BoolTranslatable]
+    public class ExpressionVariableExists : BoolExpandableExpressionImpl<ExpressionVariableExists>
     {
         public ExpressionVariableExists()
         {
@@ -21,7 +22,7 @@ namespace DataLayer.Schema
 
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            return base.TranslateToBool(expr, stateManager);
+            return stateManager.HasVariable(expr.SimpleArgs[0]);
         }
     }
 }

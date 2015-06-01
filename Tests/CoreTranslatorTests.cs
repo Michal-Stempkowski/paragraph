@@ -13,6 +13,9 @@ namespace Tests
 {
     class CoreTranslatorTests
     {
+        private const string ExistingVariable = "ExistingVariable";
+        private const string NotExistingVariable = "NotExistingVariable";
+
         private ICoreTranslator _sut;
         private IStateManager _stateManager;
 
@@ -21,6 +24,8 @@ namespace Tests
         {
             _stateManager = Substitute.For<IStateManager>();
             _sut = new CoreTranslator();
+            _stateManager.HasVariable(ExistingVariable).Returns(true);
+            _stateManager.HasVariable(NotExistingVariable).Returns(false);
         }
 
         [Test]
@@ -33,7 +38,8 @@ namespace Tests
                 "ExpressionTrue", 
                 "ExpressionFalse", 
                 "ExpressionOr",
-                "ExpressionAnd"
+                "ExpressionAnd",
+                "ExpressionVariableExists"
             }));
         }
 
@@ -113,6 +119,14 @@ namespace Tests
             expr.Args.Add(new ExpressionTrue());
             expr.Args.Add(new ExpressionFalse());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
+        }
+
+        [Test]
+        public void expression_variable_exists_should_return_whether_variable_exists()
+        {
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+            Assert.That(_sut.ExpandToBool(new ExpressionVariableExists(NotExistingVariable), _stateManager), Is.EqualTo(false));
+            Assert.That(_sut.ExpandToBool(new ExpressionVariableExists(ExistingVariable), _stateManager), Is.EqualTo(true));
         }
     }
 }
