@@ -62,6 +62,7 @@
     <Compile Include="Schema\ExpressionOr.cs" />
     <Compile Include="Schema\ExpressionFalse.cs" />
     <Compile Include="Schema\ExpressionTrue.cs" />
+    <Compile Include="Schema\ExpressionIntEqual.cs" />
     <Compile Include="Schema\ExpressionVariableExists.cs" />
     <Compile Include="Schema\RoomSchema.cs" />
     <Compile Include="Exceptions\FileDoesNotExist.cs" />

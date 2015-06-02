@@ -39,7 +39,8 @@ namespace Tests
                 "ExpressionFalse", 
                 "ExpressionOr",
                 "ExpressionAnd",
-                "ExpressionVariableExists"
+                "ExpressionVariableExists",
+                "ExpressionIntEqual"
             }));
         }
 
@@ -127,6 +128,22 @@ namespace Tests
             _sut.InitializeUnit(_sut.GetType().Assembly);
             Assert.That(_sut.ExpandToBool(new ExpressionVariableExists(NotExistingVariable), _stateManager), Is.EqualTo(false));
             Assert.That(_sut.ExpandToBool(new ExpressionVariableExists(ExistingVariable), _stateManager), Is.EqualTo(true));
+        }
+
+        [Test]
+        public void expression_variable_equal_should_work()
+        {
+            const int expectedValue = 5;
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+
+            _stateManager.GetInt(NotExistingVariable).Returns(null as int?);
+            Assert.That(_sut.ExpandToBool(new ExpressionIntEqual(NotExistingVariable, expectedValue), _stateManager), Is.EqualTo(false));
+
+            _stateManager.GetInt(ExistingVariable).Returns(3);
+            Assert.That(_sut.ExpandToBool(new ExpressionIntEqual(ExistingVariable, expectedValue), _stateManager), Is.EqualTo(false));
+
+            _stateManager.GetInt(ExistingVariable).Returns(expectedValue);
+            Assert.That(_sut.ExpandToBool(new ExpressionIntEqual(ExistingVariable, expectedValue), _stateManager), Is.EqualTo(true));
         }
     }
 }
