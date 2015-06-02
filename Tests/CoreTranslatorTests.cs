@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,6 +15,8 @@ namespace Tests
     class CoreTranslatorTests
     {
         private const string ExistingVariable = "ExistingVariable";
+        private const string LesserVariable = "LesserVariable";
+        private const string GreaterVariable = "GreaterVariable";
         private const string NotExistingVariable = "NotExistingVariable";
 
         private ICoreTranslator _sut;
@@ -40,7 +43,7 @@ namespace Tests
                 "ExpressionOr",
                 "ExpressionAnd",
                 "ExpressionVariableExists",
-                "ExpressionIntEqual"
+                "ExpressionInt"
             }));
         }
 
@@ -133,17 +136,50 @@ namespace Tests
         [Test]
         public void expression_variable_equal_should_work()
         {
-            const int expectedValue = 5;
+            var expectedValueString = "5";
+
+            var lesserValueString = "4";
+
+            var greaterValueString = "6";
+
+            var expr = new ExpressionInt {VariableName = ExistingVariable, Value = 5, OperType = OperType.Equal};
+
             _sut.InitializeUnit(_sut.GetType().Assembly);
 
-            _stateManager.GetInt(NotExistingVariable).Returns(null as int?);
-            Assert.That(_sut.ExpandToBool(new ExpressionIntEqual(NotExistingVariable, expectedValue), _stateManager), Is.EqualTo(false));
+            var resultMap = new Dictionary<string, Dictionary<OperType, bool>>
+            {
+                {
+                    lesserValueString,
+                    new Dictionary<OperType, bool>
+                    {
+                        {OperType.Equal, false}
+                    }
+                },
+                {
+                    expectedValueString,
+                    new Dictionary<OperType, bool>
+                    {
+                        {OperType.Equal, true}
+                    }
+                },
+                {
+                    greaterValueString,
+                    new Dictionary<OperType, bool>
+                    {
+                        {OperType.Equal, false}
+                    }
+                }
+            };
 
-            _stateManager.GetInt(ExistingVariable).Returns(3);
-            Assert.That(_sut.ExpandToBool(new ExpressionIntEqual(ExistingVariable, expectedValue), _stateManager), Is.EqualTo(false));
-
-            _stateManager.GetInt(ExistingVariable).Returns(expectedValue);
-            Assert.That(_sut.ExpandToBool(new ExpressionIntEqual(ExistingVariable, expectedValue), _stateManager), Is.EqualTo(true));
+            foreach (var value in resultMap.Keys)
+            {
+                foreach (var oper in resultMap[value].Keys)
+                {
+                    _stateManager.GetString(ExistingVariable).Returns(value);
+                    expr.OperType = oper;
+                    Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.EqualTo(resultMap[value][oper]));
+                }
+            }
         }
     }
 }
