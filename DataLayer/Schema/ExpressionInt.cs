@@ -33,10 +33,18 @@ namespace DataLayer.Schema
 
             var variable = Int32.Parse(stateManager.GetString(typedExpr.VariableName));
 
-            switch (OperType)
+            switch (typedExpr.OperType)
             {
                 case OperType.Equal:
                     return variable == typedExpr.Value;
+                case OperType.Greater:
+                    return variable > typedExpr.Value;
+                case OperType.GreaterEqual:
+                    return variable >= typedExpr.Value;
+                case OperType.Lesser:
+                    return variable < typedExpr.Value;
+                case OperType.LesserEqual:
+                    return variable <= typedExpr.Value;
                 default:
                     throw new NotImplementedException();
             }

@@ -152,21 +152,33 @@ namespace Tests
                     lesserValueString,
                     new Dictionary<OperType, bool>
                     {
-                        {OperType.Equal, false}
+                        {OperType.Equal, false},
+                        {OperType.Greater, false},
+                        {OperType.GreaterEqual, false},
+                        {OperType.Lesser, true},
+                        {OperType.LesserEqual, true}
                     }
                 },
                 {
                     expectedValueString,
                     new Dictionary<OperType, bool>
                     {
-                        {OperType.Equal, true}
+                        {OperType.Equal, true},
+                        {OperType.Greater, false},
+                        {OperType.GreaterEqual, true},
+                        {OperType.Lesser, false},
+                        {OperType.LesserEqual, true}
                     }
                 },
                 {
                     greaterValueString,
                     new Dictionary<OperType, bool>
                     {
-                        {OperType.Equal, false}
+                        {OperType.Equal, false},
+                        {OperType.Greater, true},
+                        {OperType.GreaterEqual, true},
+                        {OperType.Lesser, false},
+                        {OperType.LesserEqual, false}
                     }
                 }
             };
