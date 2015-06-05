@@ -29,6 +29,7 @@ namespace Tests
             _sut = new CoreTranslator();
             _stateManager.HasVariable(ExistingVariable).Returns(true);
             _stateManager.HasVariable(NotExistingVariable).Returns(false);
+            _stateManager.GetFloatEpsilonValue().Returns(0.1f);
         }
 
         [Test]
@@ -43,7 +44,10 @@ namespace Tests
                 "ExpressionOr",
                 "ExpressionAnd",
                 "ExpressionVariableExists",
-                "ExpressionInt"
+                "ExpressionInt",
+                "ExpressionString",
+                "ExpressionFloat",
+                "ExpressionNot"
             }));
         }
 
@@ -126,6 +130,19 @@ namespace Tests
         }
 
         [Test]
+        public void expression_not_should_negate_value()
+        {
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+            BoolExpandableExpression expr = new ExpressionNot();
+
+            expr.Args.Insert(0, new ExpressionTrue());
+            Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
+
+            expr.Args.Insert(0, new ExpressionFalse());
+            Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
+        }
+
+        [Test]
         public void expression_variable_exists_should_return_whether_variable_exists()
         {
             _sut.InitializeUnit(_sut.GetType().Assembly);
@@ -134,19 +151,68 @@ namespace Tests
         }
 
         [Test]
-        public void expression_variable_equal_should_work()
+        public void expression_int_variable_equal_should_work()
         {
-            var expectedValueString = "5";
+            var expr = new ExpressionInt { VariableName = ExistingVariable, Value = 5, OperType = OperType.Equal };
 
-            var lesserValueString = "4";
-
-            var greaterValueString = "6";
-
-            var expr = new ExpressionInt {VariableName = ExistingVariable, Value = 5, OperType = OperType.Equal};
+            var resultMap = GenerateResultMap("4", "5", "6");
 
             _sut.InitializeUnit(_sut.GetType().Assembly);
 
-            var resultMap = new Dictionary<string, Dictionary<OperType, bool>>
+            foreach (var value in resultMap.Keys)
+            {
+                foreach (var oper in resultMap[value].Keys)
+                {
+                    _stateManager.GetString(ExistingVariable).Returns(value);
+                    expr.OperType = oper;
+                    Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.EqualTo(resultMap[value][oper]));
+                }
+            }
+        }
+
+        [Test]
+        public void expression_string_variable_equal_should_work()
+        {
+            var expr = new ExpressionString { VariableName = ExistingVariable, Value = "Bob", OperType = OperType.Equal };
+
+            var resultMap = GenerateResultMap("Ala", "Bob", "Fred");
+
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+
+            foreach (var value in resultMap.Keys)
+            {
+                foreach (var oper in resultMap[value].Keys)
+                {
+                    _stateManager.GetString(ExistingVariable).Returns(value);
+                    expr.OperType = oper;
+                    Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.EqualTo(resultMap[value][oper]));
+                }
+            }
+        }
+
+        [Test]
+        public void expression_float_variable_equal_should_work()
+        {
+            var expr = new ExpressionFloat { VariableName = ExistingVariable, Value = 5.0f, OperType = OperType.Equal };
+
+            var resultMap = GenerateResultMap("4.0", "5.05", "6.0");
+
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+
+            foreach (var value in resultMap.Keys)
+            {
+                foreach (var oper in resultMap[value].Keys)
+                {
+                    _stateManager.GetString(ExistingVariable).Returns(value);
+                    expr.OperType = oper;
+                    Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.EqualTo(resultMap[value][oper]));
+                }
+            }
+        }
+
+        private static Dictionary<string, Dictionary<OperType, bool>> GenerateResultMap(string lesserValueString, string expectedValueString, string greaterValueString)
+        {
+            return new Dictionary<string, Dictionary<OperType, bool>>
             {
                 {
                     lesserValueString,
@@ -182,16 +248,6 @@ namespace Tests
                     }
                 }
             };
-
-            foreach (var value in resultMap.Keys)
-            {
-                foreach (var oper in resultMap[value].Keys)
-                {
-                    _stateManager.GetString(ExistingVariable).Returns(value);
-                    expr.OperType = oper;
-                    Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.EqualTo(resultMap[value][oper]));
-                }
-            }
         }
     }
 }

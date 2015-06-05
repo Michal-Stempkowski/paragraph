@@ -4,5 +4,6 @@ namespace DataLayer.Logic
     {
         bool HasVariable(string name);
         string GetString(string variableName);
+        float GetFloatEpsilonValue();
     }
 }

@@ -59,6 +59,9 @@
     <Compile Include="Schema\BoolTranslatableAttribute.cs" />
     <Compile Include="Schema\DecisionSchema.cs" />
     <Compile Include="Schema\ExpressionAnd.cs" />
+    <Compile Include="Schema\ExpressionFloat.cs" />
+    <Compile Include="Schema\ExpressionNot.cs" />
+    <Compile Include="Schema\ExpressionString.cs" />
     <Compile Include="Schema\ExpressionOr.cs" />
     <Compile Include="Schema\ExpressionFalse.cs" />
     <Compile Include="Schema\ExpressionTrue.cs" />
