@@ -5,17 +5,17 @@ using DataLayer.Logic;
 namespace DataLayer.Schema.Variable
 {
     [BoolTranslatable]
-    public class ExpressionFloat : BoolExpandableExpressionImpl<ExpressionFloat>
+    public class ExpressionFloatCheck : BoolExpandableExpressionImpl<ExpressionFloatCheck>
     {
         public string VariableName;
         public float Value;
         public OperType OperType;
 
-        public ExpressionFloat()
+        public ExpressionFloatCheck()
         {
             
         }
-        public ExpressionFloat(string variableName, float value, OperType operType)
+        public ExpressionFloatCheck(string variableName, float value, OperType operType)
         {
             VariableName = variableName;
             Value = value;
@@ -25,7 +25,7 @@ namespace DataLayer.Schema.Variable
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
             var epsilon = stateManager.GetFloatEpsilonValue();
-            var typedExpr = (ExpressionFloat)expr;
+            var typedExpr = (ExpressionFloatCheck)expr;
 
             var variable = float.Parse(
                 stateManager.GetString(typedExpr.VariableName), 

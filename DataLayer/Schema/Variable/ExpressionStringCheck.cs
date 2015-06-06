@@ -4,17 +4,17 @@ using DataLayer.Logic;
 namespace DataLayer.Schema.Variable
 {
     [BoolTranslatable]
-    public class ExpressionString : BoolExpandableExpressionImpl<ExpressionString>
+    public class ExpressionStringCheck : BoolExpandableExpressionImpl<ExpressionStringCheck>
     {
         public string VariableName;
         public string Value;
         public OperType OperType;
 
-        public ExpressionString()
+        public ExpressionStringCheck()
         {
             
         }
-        public ExpressionString(string variableName, string value, OperType operType)
+        public ExpressionStringCheck(string variableName, string value, OperType operType)
         {
             VariableName = variableName;
             Value = value;
@@ -23,7 +23,7 @@ namespace DataLayer.Schema.Variable
 
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            var typedExpr = (ExpressionString)expr;
+            var typedExpr = (ExpressionStringCheck)expr;
 
             var variable = stateManager.GetString(typedExpr.VariableName);
 

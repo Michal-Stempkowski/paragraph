@@ -8,6 +8,7 @@ using DataLayer.Core;
 using DataLayer.Logic;
 using DataLayer.Schema;
 using DataLayer.Schema.Variable;
+using DataLayer.Schema.Variable.Mutable;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -45,10 +46,11 @@ namespace Tests
                 "ExpressionOr",
                 "ExpressionAnd",
                 "ExpressionVariableExists",
-                "ExpressionInt",
-                "ExpressionString",
-                "ExpressionFloat",
-                "ExpressionNot"
+                "ExpressionIntCheck",
+                "ExpressionStringCheck",
+                "ExpressionFloatCheck",
+                "ExpressionNot",
+                "ExpressionAssign"
             }));
         }
 
@@ -154,7 +156,7 @@ namespace Tests
         [Test]
         public void expression_int_variable_equal_should_work()
         {
-            var expr = new ExpressionInt { VariableName = ExistingVariable, Value = 5, OperType = OperType.Equal };
+            var expr = new ExpressionIntCheck { VariableName = ExistingVariable, Value = 5, OperType = OperType.Equal };
 
             var resultMap = GenerateResultMap("4", "5", "6");
 
@@ -174,7 +176,7 @@ namespace Tests
         [Test]
         public void expression_string_variable_equal_should_work()
         {
-            var expr = new ExpressionString { VariableName = ExistingVariable, Value = "Bob", OperType = OperType.Equal };
+            var expr = new ExpressionStringCheck { VariableName = ExistingVariable, Value = "Bob", OperType = OperType.Equal };
 
             var resultMap = GenerateResultMap("Ala", "Bob", "Fred");
 
@@ -194,7 +196,7 @@ namespace Tests
         [Test]
         public void expression_float_variable_equal_should_work()
         {
-            var expr = new ExpressionFloat { VariableName = ExistingVariable, Value = 5.0f, OperType = OperType.Equal };
+            var expr = new ExpressionFloatCheck { VariableName = ExistingVariable, Value = 5.0f, OperType = OperType.Equal };
 
             var resultMap = GenerateResultMap("4.0", "5.05", "6.0");
 
@@ -209,6 +211,18 @@ namespace Tests
                     Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.EqualTo(resultMap[value][oper]));
                 }
             }
+        }
+
+        [Test]
+        public void expression_assign_value()
+        {
+            var expr = ExpressionAssign.Create(ExistingVariable, 5);
+
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+
+            Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
+
+            _stateManager.Received().SetString(ExistingVariable, "5");
         }
 
         private static Dictionary<string, Dictionary<OperType, bool>> GenerateResultMap(string lesserValueString, string expectedValueString, string greaterValueString)
