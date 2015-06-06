@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataLayer.Logic;
+﻿using DataLayer.Logic;
 
-namespace DataLayer.Schema
+namespace DataLayer.Schema.Variable
 {
     [BoolTranslatable]
     public class ExpressionVariableExists : BoolExpandableExpressionImpl<ExpressionVariableExists>

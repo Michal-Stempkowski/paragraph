@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataLayer.Core;
 using DataLayer.Logic;
 using DataLayer.Schema;
+using DataLayer.Schema.Variable;
 using NSubstitute;
 using NUnit.Framework;
 

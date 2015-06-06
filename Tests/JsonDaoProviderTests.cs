@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using DataLayer.Data;
 using DataLayer.Schema;
+using DataLayer.Schema.Variable;
 using DataLayer.Storage;
 using NSubstitute;
 using NUnit.Framework;

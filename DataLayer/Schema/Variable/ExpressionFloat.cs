@@ -1,14 +1,8 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataLayer.Logic;
-using NSubstitute.Routing.AutoValues;
 
-namespace DataLayer.Schema
+namespace DataLayer.Schema.Variable
 {
     [BoolTranslatable]
     public class ExpressionFloat : BoolExpandableExpressionImpl<ExpressionFloat>
