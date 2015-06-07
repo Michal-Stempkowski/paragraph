@@ -84,6 +84,7 @@
     <Compile Include="Room\RoomDataProvider.cs" />
     <Compile Include="Schema\ISchema.cs" />
     <Compile Include="Schema\Variable\Mutable\ExpressionIntModify.cs" />
+    <Compile Include="Schema\Variable\Mutable\ExprParam.cs" />
     <Compile Include="Storage\IStorageSupervisor.cs" />
     <Compile Include="Top\EntityMenu.cs" />
   </ItemGroup>

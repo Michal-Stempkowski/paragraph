@@ -290,7 +290,8 @@ namespace Tests
                 var expr = new ExpressionIntModify
                 {
                     VariableName = NotExistingVariable,
-                    Value = 2,
+                    Left = new ExprParam { ParamSource = ExprParam.Source.WorldState, Value = ExistingVariable },
+                    Right = new ExprParam { ParamSource = ExprParam.Source.Constant, Value = "2" },
                     OperType = operType
                 };
 
