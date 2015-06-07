@@ -9,13 +9,13 @@ namespace DataLayer.Schema.Variable
     {
         public string VariableName;
         public float Value;
-        public OperType OperType;
+        public CheckOperType OperType;
 
         public ExpressionFloatCheck()
         {
             
         }
-        public ExpressionFloatCheck(string variableName, float value, OperType operType)
+        public ExpressionFloatCheck(string variableName, float value, CheckOperType operType)
         {
             VariableName = variableName;
             Value = value;
@@ -33,17 +33,17 @@ namespace DataLayer.Schema.Variable
 
             switch (typedExpr.OperType)
             {
-                case OperType.Equal:
+                case CheckOperType.Equal:
                     return Math.Abs(variable - typedExpr.Value) < epsilon;
-                case OperType.Greater:
+                case CheckOperType.Greater:
                     return variable + epsilon > typedExpr.Value && 
                         Math.Abs(variable - typedExpr.Value) > epsilon;
-                case OperType.GreaterEqual:
+                case CheckOperType.GreaterEqual:
                     return variable + epsilon > typedExpr.Value;
-                case OperType.Lesser:
+                case CheckOperType.Lesser:
                     return variable - epsilon < typedExpr.Value && 
                         Math.Abs(variable - typedExpr.Value) > epsilon;
-                case OperType.LesserEqual:
+                case CheckOperType.LesserEqual:
                     return variable - epsilon < typedExpr.Value;
                 default:
                     throw new NotImplementedException();

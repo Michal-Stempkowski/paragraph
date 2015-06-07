@@ -8,13 +8,13 @@ namespace DataLayer.Schema.Variable
     {
         public string VariableName;
         public string Value;
-        public OperType OperType;
+        public CheckOperType OperType;
 
         public ExpressionStringCheck()
         {
             
         }
-        public ExpressionStringCheck(string variableName, string value, OperType operType)
+        public ExpressionStringCheck(string variableName, string value, CheckOperType operType)
         {
             VariableName = variableName;
             Value = value;
@@ -29,15 +29,15 @@ namespace DataLayer.Schema.Variable
 
             switch (typedExpr.OperType)
             {
-                case OperType.Equal:
+                case CheckOperType.Equal:
                     return variable == typedExpr.Value;
-                case OperType.Greater:
+                case CheckOperType.Greater:
                     return String.Compare(variable, typedExpr.Value, StringComparison.Ordinal) > 0;
-                case OperType.GreaterEqual:
+                case CheckOperType.GreaterEqual:
                     return String.Compare(variable, typedExpr.Value, StringComparison.Ordinal) >= 0;
-                case OperType.Lesser:
+                case CheckOperType.Lesser:
                     return String.Compare(variable, typedExpr.Value, StringComparison.Ordinal) < 0;
-                case OperType.LesserEqual:
+                case CheckOperType.LesserEqual:
                     return String.Compare(variable, typedExpr.Value, StringComparison.Ordinal) <= 0;
                 default:
                     throw new NotImplementedException();

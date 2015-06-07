@@ -50,7 +50,8 @@ namespace Tests
                 "ExpressionStringCheck",
                 "ExpressionFloatCheck",
                 "ExpressionNot",
-                "ExpressionAssign"
+                "ExpressionAssign",
+                "ExpressionIntModify"
             }));
         }
 
@@ -156,9 +157,9 @@ namespace Tests
         [Test]
         public void expression_int_variable_equal_should_work()
         {
-            var expr = new ExpressionIntCheck { VariableName = ExistingVariable, Value = 5, OperType = OperType.Equal };
+            var expr = new ExpressionIntCheck { VariableName = ExistingVariable, Value = 5, OperType = CheckOperType.Equal };
 
-            var resultMap = GenerateResultMap("4", "5", "6");
+            var resultMap = GenerateCheckResultMap("4", "5", "6");
 
             _sut.InitializeUnit(_sut.GetType().Assembly);
 
@@ -176,9 +177,9 @@ namespace Tests
         [Test]
         public void expression_string_variable_equal_should_work()
         {
-            var expr = new ExpressionStringCheck { VariableName = ExistingVariable, Value = "Bob", OperType = OperType.Equal };
+            var expr = new ExpressionStringCheck { VariableName = ExistingVariable, Value = "Bob", OperType = CheckOperType.Equal };
 
-            var resultMap = GenerateResultMap("Ala", "Bob", "Fred");
+            var resultMap = GenerateCheckResultMap("Ala", "Bob", "Fred");
 
             _sut.InitializeUnit(_sut.GetType().Assembly);
 
@@ -196,9 +197,9 @@ namespace Tests
         [Test]
         public void expression_float_variable_equal_should_work()
         {
-            var expr = new ExpressionFloatCheck { VariableName = ExistingVariable, Value = 5.0f, OperType = OperType.Equal };
+            var expr = new ExpressionFloatCheck { VariableName = ExistingVariable, Value = 5.0f, OperType = CheckOperType.Equal };
 
-            var resultMap = GenerateResultMap("4.0", "5.05", "6.0");
+            var resultMap = GenerateCheckResultMap("4.0", "5.05", "6.0");
 
             _sut.InitializeUnit(_sut.GetType().Assembly);
 
@@ -213,6 +214,49 @@ namespace Tests
             }
         }
 
+        private static Dictionary<string, Dictionary<CheckOperType, bool>> GenerateCheckResultMap(
+            string lesserValueString, 
+            string expectedValueString, 
+            string greaterValueString)
+        {
+            return new Dictionary<string, Dictionary<CheckOperType, bool>>
+            {
+                {
+                    lesserValueString,
+                    new Dictionary<CheckOperType, bool>
+                    {
+                        {CheckOperType.Equal, false},
+                        {CheckOperType.Greater, false},
+                        {CheckOperType.GreaterEqual, false},
+                        {CheckOperType.Lesser, true},
+                        {CheckOperType.LesserEqual, true}
+                    }
+                },
+                {
+                    expectedValueString,
+                    new Dictionary<CheckOperType, bool>
+                    {
+                        {CheckOperType.Equal, true},
+                        {CheckOperType.Greater, false},
+                        {CheckOperType.GreaterEqual, true},
+                        {CheckOperType.Lesser, false},
+                        {CheckOperType.LesserEqual, true}
+                    }
+                },
+                {
+                    greaterValueString,
+                    new Dictionary<CheckOperType, bool>
+                    {
+                        {CheckOperType.Equal, false},
+                        {CheckOperType.Greater, true},
+                        {CheckOperType.GreaterEqual, true},
+                        {CheckOperType.Lesser, false},
+                        {CheckOperType.LesserEqual, false}
+                    }
+                }
+            };
+        }
+
         [Test]
         public void expression_assign_value()
         {
@@ -225,44 +269,84 @@ namespace Tests
             _stateManager.Received().SetString(ExistingVariable, "5");
         }
 
-        private static Dictionary<string, Dictionary<OperType, bool>> GenerateResultMap(string lesserValueString, string expectedValueString, string greaterValueString)
+        [Test]
+        public void expression_modify_int()
         {
-            return new Dictionary<string, Dictionary<OperType, bool>>
+            var result = new Dictionary<ModifyOperType, string>
             {
-                {
-                    lesserValueString,
-                    new Dictionary<OperType, bool>
-                    {
-                        {OperType.Equal, false},
-                        {OperType.Greater, false},
-                        {OperType.GreaterEqual, false},
-                        {OperType.Lesser, true},
-                        {OperType.LesserEqual, true}
-                    }
-                },
-                {
-                    expectedValueString,
-                    new Dictionary<OperType, bool>
-                    {
-                        {OperType.Equal, true},
-                        {OperType.Greater, false},
-                        {OperType.GreaterEqual, true},
-                        {OperType.Lesser, false},
-                        {OperType.LesserEqual, true}
-                    }
-                },
-                {
-                    greaterValueString,
-                    new Dictionary<OperType, bool>
-                    {
-                        {OperType.Equal, false},
-                        {OperType.Greater, true},
-                        {OperType.GreaterEqual, true},
-                        {OperType.Lesser, false},
-                        {OperType.LesserEqual, false}
-                    }
-                }
+                { ModifyOperType.Add, "7"},
+                { ModifyOperType.Subtract, "3"},
+                { ModifyOperType.Multiply, "10"},
+                { ModifyOperType.Divide, "2"}
             };
+
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+
+            _stateManager.GetString(Arg.Any<string>()).Returns(null as string);
+            _stateManager.GetString(ExistingVariable).Returns("5");
+
+            foreach (var operType in result.Keys)
+            {
+                var expr = new ExpressionIntModify
+                {
+                    VariableName = NotExistingVariable,
+                    Value = 2,
+                    OperType = operType
+                };
+
+                Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
+                _stateManager.DidNotReceive().SetString(Arg.Any<string>(), Arg.Any<string>());
+
+                expr.VariableName = ExistingVariable;
+                Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
+                _stateManager.Received().SetString(ExistingVariable, result[operType]);
+
+                _stateManager.ClearReceivedCalls();
+            }
+            
         }
+
+//        private static Dictionary<string, Dictionary<CheckOperType, bool>> GenerateModifResultMap(
+//            string lesserValueString, 
+//            string expectedValueString, 
+//            string greaterValueString)
+//        {
+//            return new Dictionary<string, Dictionary<CheckOperType, bool>>
+//            {
+//                {
+//                    lesserValueString,
+//                    new Dictionary<CheckOperType, bool>
+//                    {
+//                        {CheckOperType.Equal, false},
+//                        {CheckOperType.Greater, false},
+//                        {CheckOperType.GreaterEqual, false},
+//                        {CheckOperType.Lesser, true},
+//                        {CheckOperType.LesserEqual, true}
+//                    }
+//                },
+//                {
+//                    expectedValueString,
+//                    new Dictionary<CheckOperType, bool>
+//                    {
+//                        {CheckOperType.Equal, true},
+//                        {CheckOperType.Greater, false},
+//                        {CheckOperType.GreaterEqual, true},
+//                        {CheckOperType.Lesser, false},
+//                        {CheckOperType.LesserEqual, true}
+//                    }
+//                },
+//                {
+//                    greaterValueString,
+//                    new Dictionary<CheckOperType, bool>
+//                    {
+//                        {CheckOperType.Equal, false},
+//                        {CheckOperType.Greater, true},
+//                        {CheckOperType.GreaterEqual, true},
+//                        {CheckOperType.Lesser, false},
+//                        {CheckOperType.LesserEqual, false}
+//                    }
+//                }
+//            };
+//        }
     }
 }

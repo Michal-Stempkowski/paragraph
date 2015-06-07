@@ -60,6 +60,7 @@
     <Compile Include="Schema\BoolTranslatableAttribute.cs" />
     <Compile Include="Schema\DecisionSchema.cs" />
     <Compile Include="Schema\ExpressionAnd.cs" />
+    <Compile Include="Schema\ModifyOperType.cs" />
     <Compile Include="Schema\Variable\ExpressionFloatCheck.cs" />
     <Compile Include="Schema\ExpressionNot.cs" />
     <Compile Include="Schema\Variable\Mutable\ExpressionAssign.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Schema\ExpressionTrue.cs" />
     <Compile Include="Schema\Variable\ExpressionIntCheck.cs" />
     <Compile Include="Schema\Variable\ExpressionVariableExists.cs" />
-    <Compile Include="Schema\OperType.cs" />
+    <Compile Include="Schema\CheckOperType.cs" />
     <Compile Include="Schema\RoomSchema.cs" />
     <Compile Include="Exceptions\LoadFailedException.cs" />
     <Compile Include="Room\IRoomDataProvider.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room\RoomDataProvider.cs" />
     <Compile Include="Schema\ISchema.cs" />
+    <Compile Include="Schema\Variable\Mutable\ExpressionIntModify.cs" />
     <Compile Include="Storage\IStorageSupervisor.cs" />
     <Compile Include="Top\EntityMenu.cs" />
   </ItemGroup>

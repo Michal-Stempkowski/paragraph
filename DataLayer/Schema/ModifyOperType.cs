@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Schema
 {
-    public enum OperType
+    public enum ModifyOperType
     {
-        Equal,
-        Greater,
-        GreaterEqual,
-        Lesser,
-        LesserEqual
+        Add,
+        Subtract,
+        Multiply,
+        Divide
     }
 }
