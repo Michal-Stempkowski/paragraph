@@ -1,11 +1,13 @@
 ﻿using System;
+using DataLayer.Logic;
 using DataLayer.Schema;
 using DataLayer.Storage;
 using Newtonsoft.Json;
 
 namespace DataLayer.Data
 {
-    public class JsonDaoProvider : IDaoProvider
+    public class JsonDaoProvider<TStateManager> : IDaoProvider
+        where TStateManager : IStateManager
     {
         private readonly IStorageSupervisor _storageSupervisor;
 
@@ -24,6 +26,18 @@ namespace DataLayer.Data
         {
             string serializedRoom = JsonConvert.SerializeObject(room);
             _storageSupervisor.Write(path, serializedRoom);
+        }
+
+        public void WriteStateManager(string path, IStateManager stateManager)
+        {
+            string serializedManager = JsonConvert.SerializeObject(stateManager);
+            _storageSupervisor.Write(path, serializedManager);
+        }
+
+        public IStateManager ReadStateManager(string path)
+        {
+            string serializedManager = _storageSupervisor.Read(path);
+            return JsonConvert.DeserializeObject<TStateManager>(serializedManager);
         }
     }
 }
