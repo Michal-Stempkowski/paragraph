@@ -53,6 +53,7 @@
     <Compile Include="SanityCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateManagerTests.cs" />
+    <Compile Include="StorageTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

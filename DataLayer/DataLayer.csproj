@@ -88,6 +88,7 @@
     <Compile Include="Schema\Variable\Mutable\ExpressionIntModify.cs" />
     <Compile Include="Schema\Variable\Mutable\ExprParam.cs" />
     <Compile Include="Storage\IStorageSupervisor.cs" />
+    <Compile Include="Storage\FileStorageSupervisor.cs" />
     <Compile Include="Top\EntityMenu.cs" />
   </ItemGroup>
   <ItemGroup>
