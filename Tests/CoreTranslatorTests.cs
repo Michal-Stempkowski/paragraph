@@ -51,7 +51,8 @@ namespace Tests
                 "ExpressionFloatCheck",
                 "ExpressionNot",
                 "ExpressionAssign",
-                "ExpressionIntModify"
+                "ExpressionIntModify",
+                "ExpressionFloatModify"
             }));
         }
 
@@ -304,50 +305,43 @@ namespace Tests
 
                 _stateManager.ClearReceivedCalls();
             }
-            
         }
 
-//        private static Dictionary<string, Dictionary<CheckOperType, bool>> GenerateModifResultMap(
-//            string lesserValueString, 
-//            string expectedValueString, 
-//            string greaterValueString)
-//        {
-//            return new Dictionary<string, Dictionary<CheckOperType, bool>>
-//            {
-//                {
-//                    lesserValueString,
-//                    new Dictionary<CheckOperType, bool>
-//                    {
-//                        {CheckOperType.Equal, false},
-//                        {CheckOperType.Greater, false},
-//                        {CheckOperType.GreaterEqual, false},
-//                        {CheckOperType.Lesser, true},
-//                        {CheckOperType.LesserEqual, true}
-//                    }
-//                },
-//                {
-//                    expectedValueString,
-//                    new Dictionary<CheckOperType, bool>
-//                    {
-//                        {CheckOperType.Equal, true},
-//                        {CheckOperType.Greater, false},
-//                        {CheckOperType.GreaterEqual, true},
-//                        {CheckOperType.Lesser, false},
-//                        {CheckOperType.LesserEqual, true}
-//                    }
-//                },
-//                {
-//                    greaterValueString,
-//                    new Dictionary<CheckOperType, bool>
-//                    {
-//                        {CheckOperType.Equal, false},
-//                        {CheckOperType.Greater, true},
-//                        {CheckOperType.GreaterEqual, true},
-//                        {CheckOperType.Lesser, false},
-//                        {CheckOperType.LesserEqual, false}
-//                    }
-//                }
-//            };
-//        }
+        [Test]
+        public void expression_modify_float()
+        {
+            var result = new Dictionary<ModifyOperType, string>
+            {
+                { ModifyOperType.Add, "7"},
+                { ModifyOperType.Subtract, "3"},
+                { ModifyOperType.Multiply, "10"},
+                { ModifyOperType.Divide, "2.5"}
+            };
+
+            _sut.InitializeUnit(_sut.GetType().Assembly);
+
+            _stateManager.GetString(Arg.Any<string>()).Returns(null as string);
+            _stateManager.GetString(ExistingVariable).Returns("5.0");
+
+            foreach (var operType in result.Keys)
+            {
+                var expr = new ExpressionFloatModify
+                {
+                    VariableName = NotExistingVariable,
+                    Left = new ExprParam { ParamSource = ExprParam.Source.WorldState, Value = ExistingVariable },
+                    Right = new ExprParam { ParamSource = ExprParam.Source.Constant, Value = "2.0" },
+                    OperType = operType
+                };
+
+                Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
+                _stateManager.DidNotReceive().SetString(Arg.Any<string>(), Arg.Any<string>());
+
+                expr.VariableName = ExistingVariable;
+                Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
+                _stateManager.Received().SetString(ExistingVariable, result[operType]);
+
+                _stateManager.ClearReceivedCalls();
+            }
+        }
     }
 }
