@@ -25,7 +25,19 @@ namespace GUI
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
+            var source = GuiHelper.ShowLoadGameFileChooser();
 
+            if (String.IsNullOrWhiteSpace(source))
+            {
+                return;
+            }
+
+            var destination = GuiHelper.ShowSaveGameFileChooser();
+
+            if (String.IsNullOrWhiteSpace(destination))
+            {
+                return;
+            }
         }
 
         private void LoadGameButton_Click(object sender, EventArgs e)
@@ -40,8 +52,7 @@ namespace GUI
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Resources.ExitApplicationPrompt, Resources.ExitApplicationTitle,
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (GuiHelper.ShowExitPromptWindow())
             {
                 Close();
             }
