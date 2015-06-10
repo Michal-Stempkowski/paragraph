@@ -36,7 +36,7 @@ namespace GUI
                 return;
             }
 
-            var destination = GuiHelper.ShowSaveGameFileChooser();
+            var destination = GuiHelper.ShowSaveNewGameFileChooser();
 
             MessageBox.Show(destination);
 
@@ -66,7 +66,11 @@ namespace GUI
 
         private void EditorButton_Click(object sender, EventArgs e)
         {
+            var entity = new Entity();
+            entity.MainMenuForm = this;
 
+            entity.Show();
+            Hide();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
