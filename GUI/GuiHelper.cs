@@ -18,7 +18,7 @@ namespace GUI
             return file.ShowDialog() == DialogResult.OK ? file.FileName : "";
         }
 
-        public static string ShowSaveGameFileChooser()
+        public static string ShowSaveNewGameFileChooser()
         {
             var file = new SaveFileDialog();
 
