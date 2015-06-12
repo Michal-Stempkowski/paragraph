@@ -41,5 +41,10 @@ namespace DataLayer.Top
         {
             _provider.PerformEntityTransition(path, _stateManager);
         }
+
+        public IStateManager StateManager
+        {
+            get { throw new System.NotImplementedException(); }
+        }
     }
 }

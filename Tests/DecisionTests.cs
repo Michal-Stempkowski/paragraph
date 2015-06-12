@@ -55,7 +55,7 @@ namespace Tests
         [Test]
         public void effect_should_be_mutable()
         {
-            Assert.That(_sut.Effect, Is.EqualTo(_sut.NoEffect));
+            Assert.That(_sut.Effect, Is.EqualTo(Decision.NoEffect));
 
             var result = "";
 

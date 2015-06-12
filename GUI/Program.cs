@@ -19,13 +19,41 @@ namespace GUI
         [STAThread]
         static void Main()
         {
-            var stateManager = Substitute.For<IStateManager>();
-            var dataProvider = Substitute.For<IEntityDataProvider>();
-//            dataProvider.CurrentEntity.Returns(new RoomSchema{})
+//            var stateManager = Substitute.For<IStateManager>();
+//            var dataProvider = Substitute.For<IEntityDataProvider>();
+//            dataProvider.
+
+            List<IDecision> decisionsEntities = null;
+
+            decisionsEntities = new List<IDecision>
+            {
+                new Decision
+                {
+                    Description = "Description1",
+                    Destination = @"path/to/room.room",
+                    Effect = Decision.NoEffect,
+                    IsVisible = true
+                },
+                new Decision
+                {
+                    Description = "Description2",
+                    Destination = @"path.room",
+                    Effect = x => decisionsEntities[1].Description = "Changed",
+                    IsVisible = true
+                }
+            };
+
+            var mainMenu = Substitute.For<IMainMenu>();
+            var entityMenu = Substitute.For<IEntityMenu>();
+
+            mainMenu.StartGame(Arg.Any<string>()).Returns(entityMenu);
+
+            entityMenu.DescritptionBarContent.Returns("Sample description");
+            entityMenu.GetAvailableDecisions().Returns(decisionsEntities);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main(new MainMenu(dataProvider, stateManager)));
+            Application.Run(new Main(mainMenu));
         }
     }
 }

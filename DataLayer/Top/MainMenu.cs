@@ -23,7 +23,7 @@ namespace DataLayer.Top
 //            throw new NotImplementedException();
         }
 
-        public EntityMenu StartGame(string destination)
+        public IEntityMenu StartGame(string destination)
         {
             var entityMenu = new EntityMenu(_provider, _stateManager);
             entityMenu.PerformTransition(destination);

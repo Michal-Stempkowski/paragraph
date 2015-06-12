@@ -17,21 +17,19 @@ namespace DataLayer.Logic
 
         public bool PerformEntityTransition(string entityPath, IStateManager stateManager)
         {
-            if (String.IsNullOrWhiteSpace(entityPath))
+            if (String.IsNullOrWhiteSpace(entityPath) || !entityPath.EndsWith(RoomFileExtension))
             {
                 return false;
             }
-            else if (entityPath.EndsWith(RoomFileExtension))
+
+            try
             {
-                try
-                {
-                    CurrentEntity = _roomDataProvider.LoadRoom(entityPath, stateManager);
-                    return true;
-                }
-                catch (LoadFailedException)
-                {
+                CurrentEntity = _roomDataProvider.LoadRoom(entityPath, stateManager);
+                return true;
+            }
+            catch (LoadFailedException)
+            {
                     
-                }
             }
 
             return false;

@@ -9,5 +9,6 @@ namespace DataLayer.Top
         IList<IDecision> GetAvailableDecisions();
         void Decide(IDecision decision);
         void PerformTransition(string path);
+        IStateManager StateManager { get; }
     }
 }

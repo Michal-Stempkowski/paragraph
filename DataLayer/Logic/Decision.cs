@@ -18,7 +18,7 @@ namespace DataLayer.Logic
 
         public string Destination { get; set; }
 
-        public Action<IStateManager> NoEffect
+        public static Action<IStateManager> NoEffect
         {
             get { return x => { }; }
         }

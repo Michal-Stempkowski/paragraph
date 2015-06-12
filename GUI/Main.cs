@@ -18,7 +18,7 @@ namespace GUI
     {
         private readonly IMainMenu _mainMenu;
 
-        public Main(MainMenu mainMenu)
+        public Main(IMainMenu mainMenu)
         {
             _mainMenu = mainMenu;
             InitializeComponent();
