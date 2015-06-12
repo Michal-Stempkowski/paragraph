@@ -15,16 +15,12 @@ namespace GUI
     {
         private readonly EntityMenu _entityMenu;
         private readonly Main _mainMenuForm;
-        private readonly IEntityCreator _creator;
 
-        public Entity(EntityMenu entityMenu, Main mainMenuForm, IEntityCreator creator)
+        public Entity(EntityMenu entityMenu, Main mainMenuForm)
         {
             _entityMenu = entityMenu;
             _mainMenuForm = mainMenuForm;
-            _creator = creator;
             InitializeComponent();
-
-            _creator.CreateDecisionButtons(decisionPanel, _entityMenu);
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)

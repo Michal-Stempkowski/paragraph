@@ -89,6 +89,8 @@
     <Compile Include="Storage\IStorageSupervisor.cs" />
     <Compile Include="Storage\FileStorageSupervisor.cs" />
     <Compile Include="Top\EntityMenu.cs" />
+    <Compile Include="Top\IEntityMenu.cs" />
+    <Compile Include="Top\IMainMenu.cs" />
     <Compile Include="Top\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -54,7 +54,6 @@
     <Compile Include="Entity.Designer.cs">
       <DependentUpon>Entity.cs</DependentUpon>
     </Compile>
-    <Compile Include="EntityCreator.cs" />
     <Compile Include="GuiHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>

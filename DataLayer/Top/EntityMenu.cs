@@ -3,7 +3,7 @@ using DataLayer.Logic;
 
 namespace DataLayer.Top
 {
-    public class EntityMenu
+    public class EntityMenu : IEntityMenu
     {
         private readonly IEntityDataProvider _provider;
         private readonly IStateManager _stateManager;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataLayer.Top;
 using GUI.Properties;
 using NSubstitute;
 using MainMenu = DataLayer.Top.MainMenu;
@@ -15,7 +16,7 @@ namespace GUI
 {
     public partial class Main : Form
     {
-        private readonly MainMenu _mainMenu;
+        private readonly IMainMenu _mainMenu;
 
         public Main(MainMenu mainMenu)
         {
@@ -42,7 +43,7 @@ namespace GUI
 
             var entityMenu = _mainMenu.StartGame(destination);
 
-            var form = new Entity(entityMenu, this, new PresenterEntityCreator());
+            var form = new Entity(entityMenu, this);
             form.Show();
             Hide();
         }
@@ -77,7 +78,7 @@ namespace GUI
         private void EditorButton_Click(object sender, EventArgs e)
         {
             var entityMenu = _mainMenu.StartGame("");
-            var entity = new Entity(entityMenu, this, new EditorEntityCreator());
+            var entity = new Entity(entityMenu, this);
 
             entity.Show();
             Hide();
