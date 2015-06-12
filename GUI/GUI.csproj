@@ -54,6 +54,12 @@
     <Compile Include="Entity.Designer.cs">
       <DependentUpon>Entity.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntityEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntityEditor.Designer.cs">
+      <DependentUpon>EntityEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -65,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Entity.resx">
       <DependentUpon>Entity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntityEditor.resx">
+      <DependentUpon>EntityEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

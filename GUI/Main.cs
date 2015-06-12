@@ -77,11 +77,13 @@ namespace GUI
 
         private void EditorButton_Click(object sender, EventArgs e)
         {
-            var entityMenu = _mainMenu.StartGame("");
-            var entity = new Entity(entityMenu, this);
-
-            entity.Show();
-            Hide();
+//            var entityMenu = _mainMenu.StartGame("");
+//            var entity = new Entity(entityMenu, this);
+//
+//            entity.Show();
+//            Hide();
+            var entityEditor = new EntityEditor();
+            entityEditor.Show();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
