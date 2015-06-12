@@ -7,17 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataLayer.Top;
 
 namespace GUI
 {
     public partial class Entity : Form
     {
-        public Entity()
-        {
-            InitializeComponent();
-        }
+        private readonly EntityMenu _entityMenu;
+        private readonly Main _mainMenuForm;
+        private readonly IEntityCreator _creator;
 
-        public Form MainMenuForm { get; set; }
+        public Entity(EntityMenu entityMenu, Main mainMenuForm, IEntityCreator creator)
+        {
+            _entityMenu = entityMenu;
+            _mainMenuForm = mainMenuForm;
+            _creator = creator;
+            InitializeComponent();
+
+            _creator.CreateDecisionButtons(decisionPanel, _entityMenu);
+        }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
@@ -36,7 +44,7 @@ namespace GUI
 
         private void _onClosing(object sender, FormClosingEventArgs e)
         {
-            MainMenuForm.Show();
+            _mainMenuForm.Show();
         }
     }
 }

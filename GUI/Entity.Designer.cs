@@ -32,12 +32,11 @@
             this._textLayout = new System.Windows.Forms.TableLayoutPanel();
             this._nameTextbox = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.decisionPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.addNewDecisionButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this._textLayout.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.decisionPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -48,7 +47,7 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.Controls.Add(this._textLayout, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.decisionPanel, 0, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -99,36 +98,26 @@
             this.textBox1.Size = new System.Drawing.Size(251, 131);
             this.textBox1.TabIndex = 1;
             // 
-            // flowLayoutPanel1
+            // decisionPanel
             // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.decisionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 169);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(257, 66);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.decisionPanel.Controls.Add(this.addNewDecisionButton);
+            this.decisionPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.decisionPanel.Location = new System.Drawing.Point(3, 169);
+            this.decisionPanel.Name = "decisionPanel";
+            this.decisionPanel.Size = new System.Drawing.Size(257, 66);
+            this.decisionPanel.TabIndex = 1;
             // 
-            // button1
+            // addNewDecisionButton
             // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(3, 32);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addNewDecisionButton.Location = new System.Drawing.Point(3, 3);
+            this.addNewDecisionButton.Name = "addNewDecisionButton";
+            this.addNewDecisionButton.Size = new System.Drawing.Size(75, 23);
+            this.addNewDecisionButton.TabIndex = 0;
+            this.addNewDecisionButton.Text = "Add new decision";
+            this.addNewDecisionButton.UseVisualStyleBackColor = true;
             // 
             // Entity
             // 
@@ -143,7 +132,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this._textLayout.ResumeLayout(false);
             this._textLayout.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.decisionPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -154,9 +143,8 @@
         private System.Windows.Forms.TableLayoutPanel _textLayout;
         private System.Windows.Forms.TextBox _nameTextbox;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.FlowLayoutPanel decisionPanel;
+        private System.Windows.Forms.Button addNewDecisionButton;
 
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GUI.Properties;
+using NSubstitute;
 using MainMenu = DataLayer.Top.MainMenu;
 
 namespace GUI
@@ -16,10 +17,10 @@ namespace GUI
     {
         private readonly MainMenu _mainMenu;
 
-        public Main()
+        public Main(MainMenu mainMenu)
         {
+            _mainMenu = mainMenu;
             InitializeComponent();
-            _mainMenu = new MainMenu();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -29,45 +30,54 @@ namespace GUI
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            var source = GuiHelper.ShowLoadGameFileChooser();
+            LoadGame(CreateNewGame());
+        }
 
-            if (String.IsNullOrWhiteSpace(source))
-            {
-                return;
-            }
-
-            var destination = GuiHelper.ShowSaveNewGameFileChooser();
-
-            MessageBox.Show(destination);
-
+        private void LoadGame(string destination)
+        {
             if (String.IsNullOrWhiteSpace(destination))
             {
                 return;
             }
 
-            _mainMenu.CreateNewGame(source, destination);
-            var roomData = _mainMenu.StartGame(destination);
+            var entityMenu = _mainMenu.StartGame(destination);
 
-//            var form = newform
-            Close();
+            var form = new Entity(entityMenu, this, new PresenterEntityCreator());
+            form.Show();
+            Hide();
+        }
+
+        private string CreateNewGame()
+        {
+            var source = GuiHelper.ShowLoadGameFileChooser();
+
+            if (String.IsNullOrWhiteSpace(source))
+            {
+                return "";
+            }
+
+            var destination = GuiHelper.ShowSaveNewGameFileChooser();
+
+            if (String.IsNullOrWhiteSpace(destination))
+            {
+                return destination;
+            }
+
+            MessageBox.Show(destination);
+
+            _mainMenu.CreateNewGame(source, destination);
+            return destination;
         }
 
         private void LoadGameButton_Click(object sender, EventArgs e)
         {
-            var localization = GuiHelper.ShowLoadGameFileChooser();
-
-            if (String.IsNullOrWhiteSpace(localization))
-            {
-                return;
-            }
-
-            var roomData = _mainMenu.StartGame(localization);
+            LoadGame(GuiHelper.ShowLoadGameFileChooser());
         }
 
         private void EditorButton_Click(object sender, EventArgs e)
         {
-            var entity = new Entity();
-            entity.MainMenuForm = this;
+            var entityMenu = _mainMenu.StartGame("");
+            var entity = new Entity(entityMenu, this, new EditorEntityCreator());
 
             entity.Show();
             Hide();
@@ -75,10 +85,12 @@ namespace GUI
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if (GuiHelper.ShowExitPromptWindow())
-            {
-                Close();
-            }
+            Close();
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = !GuiHelper.ShowExitPromptWindow();
         }
     }
 }

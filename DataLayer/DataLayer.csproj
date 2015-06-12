@@ -52,7 +52,6 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Core\CoreTranslator.cs" />
     <Compile Include="Data\IDaoProvider.cs" />
-    <Compile Include="Data\IRoom.cs" />
     <Compile Include="Data\JsonDaoProvider.cs" />
     <Compile Include="Core\ICoreTranslator.cs" />
     <Compile Include="Exceptions\FileDoesNotExistException.cs" />

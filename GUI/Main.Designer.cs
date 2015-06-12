@@ -110,6 +110,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Main";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
