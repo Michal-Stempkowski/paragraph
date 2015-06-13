@@ -30,8 +30,17 @@ namespace GUI
         {
             _descriptionBox.Text = _decision.Description;
             _destinationBox.Text = _decision.Destination;
+
+
             _visibilityRequirementsButton.Tag = _decision.VisibilityRequirements;
+            _visibilityRequirementsButton.Click += VisibilityRequirementsButtonOnClick;
+
             _effectButton.Tag = _decision.Effect;
+        }
+
+        private void VisibilityRequirementsButtonOnClick(object sender, EventArgs eventArgs)
+        {
+            throw new NotImplementedException();
         }
 
         private void GuiToDecision()
