@@ -61,6 +61,8 @@
     <Compile Include="Schema\DecisionSchema.cs" />
     <Compile Include="Schema\ExpressionAnd.cs" />
     <Compile Include="Schema\ModifyOperType.cs" />
+    <Compile Include="Schema\Validation\IValidationAttribute.cs" />
+    <Compile Include="Schema\Validation\VariableIdentifierAttribute.cs" />
     <Compile Include="Schema\Variable\ExpressionFloatCheck.cs" />
     <Compile Include="Schema\ExpressionNot.cs" />
     <Compile Include="Schema\Variable\Mutable\ExpressionAssign.cs" />

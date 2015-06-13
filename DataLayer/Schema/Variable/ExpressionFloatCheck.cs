@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Globalization;
 using DataLayer.Logic;
+using DataLayer.Schema.Validation;
 
 namespace DataLayer.Schema.Variable
 {
     [BoolTranslatable]
     public class ExpressionFloatCheck : BoolExpandableExpressionImpl<ExpressionFloatCheck>
     {
-        public string VariableName;
+        [VariableIdentifier]
+        public string VariableName { get; set; }
+
         public float Value;
         public CheckOperType OperType;
 

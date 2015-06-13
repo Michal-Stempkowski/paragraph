@@ -48,7 +48,7 @@ namespace GUI
                         case Keys.Control:
                             throw new NotImplementedException();
                         case Keys.Alt:
-                            throw new RuntimeBinderException();
+                            throw new NotImplementedException();
                     }
                 };
 

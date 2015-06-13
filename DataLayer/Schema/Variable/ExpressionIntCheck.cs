@@ -1,12 +1,15 @@
 ﻿using System;
 using DataLayer.Logic;
+using DataLayer.Schema.Validation;
 
 namespace DataLayer.Schema.Variable
 {
     [BoolTranslatable]
     public class ExpressionIntCheck : BoolExpandableExpressionImpl<ExpressionIntCheck>
     {
-        public string VariableName;
+        [VariableIdentifier]
+        public string VariableName { get; set; }
+
         public int Value;
         public CheckOperType OperType;
 

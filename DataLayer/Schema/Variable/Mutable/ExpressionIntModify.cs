@@ -1,12 +1,15 @@
 ﻿using System;
 using DataLayer.Logic;
+using DataLayer.Schema.Validation;
 
 namespace DataLayer.Schema.Variable.Mutable
 {
     [BoolTranslatable]
     public class ExpressionIntModify : BoolExpandableExpressionImpl<ExpressionIntModify>
     {
-        public string VariableName;
+        [VariableIdentifier]
+        public string VariableName { get; set; }
+
         public ExprParam Left;
         public ExprParam Right;
         public ModifyOperType OperType;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Dynamic;
 using DataLayer.Logic;
+using DataLayer.Schema.Validation;
 
 namespace DataLayer.Schema.Variable.Mutable
 {
@@ -8,8 +9,10 @@ namespace DataLayer.Schema.Variable.Mutable
     
     public class ExpressionAssign : BoolExpandableExpressionImpl<ExpressionAssign>
     {
-        public string VariableName;
-        public string Value;
+        [VariableIdentifier]
+        public string VariableName { get; set; }
+        [VariableIdentifier]
+        public string Value { get; set; }
 
         public static ExpressionAssign Create<T>(string variableName, T value)
         {
