@@ -61,6 +61,16 @@ namespace GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap all_you_need_is_love {
+            get {
+                object obj = ResourceManager.GetObject("all you need is love", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you really want to exit application?.
         /// </summary>
         internal static string ExitApplicationPrompt {

@@ -77,10 +77,10 @@
             this.descriptionBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.descriptionBox.Enabled = false;
             this.descriptionBox.Location = new System.Drawing.Point(3, 3);
             this.descriptionBox.Multiline = true;
             this.descriptionBox.Name = "descriptionBox";
+            this.descriptionBox.ReadOnly = true;
             this.descriptionBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.descriptionBox.Size = new System.Drawing.Size(251, 154);
             this.descriptionBox.TabIndex = 1;

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataLayer.Schema;
 using DataLayer.Top;
 using Microsoft.CSharp.RuntimeBinder;
 
@@ -23,6 +24,11 @@ namespace GUI
             _main = main;
             InitializeComponent();
 
+            ReloadGui();
+        }
+
+        private void ReloadGui()
+        {
             toolTipHelper.RemoveAll();
 
             var roomSchema = _entityEditorMenu.CurrentSchema;
@@ -38,24 +44,35 @@ namespace GUI
                 var button = new Button
                 {
                     Text = decision.Description,
-                    
+                    Tag = decision
                 };
 
-                button.Click += (sender, args) =>
-                {
-                    switch (ModifierKeys)
-                    {
-                        case Keys.Control:
-                            throw new NotImplementedException();
-                        case Keys.Alt:
-                            throw new NotImplementedException();
-                    }
-                };
+                button.Click += HandleDecisionButtonClick;
 
                 decisionPanel.Controls.Add(button);
                 toolTipHelper.SetToolTip(button, decision.Destination);
                 decisionPanel.SetFlowBreak(button, true);
             }
+        }
+
+        private void HandleDecisionButtonClick(object sender, EventArgs args)
+        {
+            var self = sender as Button;
+            switch (ModifierKeys)
+            {
+                case Keys.Control:
+                    throw new NotImplementedException();
+                case Keys.Alt:
+                    throw new NotImplementedException();
+            }
+
+            var decision = self.Tag as DecisionSchema;
+
+            var decisionEditor = new DecisionEditor(_entityEditorMenu, decision);
+
+            decisionEditor.ShowDialog(this);
+
+            ReloadGui();
         }
 
         private void EntityEditor_FormClosing(object sender, FormClosingEventArgs e)
