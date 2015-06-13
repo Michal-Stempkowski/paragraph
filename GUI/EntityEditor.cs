@@ -39,20 +39,23 @@ namespace GUI
             decisionPanel.Controls.Clear();
             decisionPanel.Controls.Add(addNewDecisionButton);
 
-            foreach (var decision in roomSchema.Decisions)
+            roomSchema.Decisions.ForEach(AddDecisionButton);
+        }
+
+        private void AddDecisionButton(DecisionSchema decision)
+        {
+            var button = new Button
             {
-                var button = new Button
-                {
-                    Text = decision.Description,
-                    Tag = decision
-                };
+                AutoSize = true,
+                Text = decision.Description,
+                Tag = decision
+            };
 
-                button.Click += HandleDecisionButtonClick;
+            button.Click += HandleDecisionButtonClick;
 
-                decisionPanel.Controls.Add(button);
-                toolTipHelper.SetToolTip(button, decision.Destination);
-                decisionPanel.SetFlowBreak(button, true);
-            }
+            decisionPanel.Controls.Add(button);
+            toolTipHelper.SetToolTip(button, decision.Destination);
+            decisionPanel.SetFlowBreak(button, true);
         }
 
         private void HandleDecisionButtonClick(object sender, EventArgs args)
