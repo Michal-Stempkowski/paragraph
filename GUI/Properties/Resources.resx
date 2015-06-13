@@ -120,4 +120,7 @@
   <data name="ExitApplicationTitle" xml:space="preserve">
     <value>Exit application...</value>
   </data>
+  <data name="GuiHelper_ShowEditorFileChooser_Select_existing_or_create_new_file" xml:space="preserve">
+    <value>Select existing or create new file</value>
+  </data>
 </root>

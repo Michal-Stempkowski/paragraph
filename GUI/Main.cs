@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,8 +83,20 @@ namespace GUI
 //
 //            entity.Show();
 //            Hide();
-            var entityEditor = new EntityEditor();
+            var destination = GuiHelper.ShowEditorFileChooser();
+
+            if (String.IsNullOrWhiteSpace(destination) ||
+                _mainMenu.InitEditor(destination))
+            {
+                return;
+            }
+
+            var entityEditorMenu = _mainMenu.StartEditor(destination);
+
+            var entityEditor = new EntityEditor(entityEditorMenu, this);
             entityEditor.Show();
+
+            Hide();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

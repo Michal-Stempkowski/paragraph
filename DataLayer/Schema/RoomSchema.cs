@@ -7,6 +7,5 @@ namespace DataLayer.Schema
         public string Name { get; set; }
         public string Description { get; set; }
         public List<DecisionSchema> Decisions { get; set; }
-        public BoolExpandableExpression Effect { get; set; }
     }
 }

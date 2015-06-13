@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.descriptionBox = new System.Windows.Forms.TextBox();
             this.decisionPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.addNewDecisionButton = new System.Windows.Forms.Button();
+            this.toolTipHelper = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -57,8 +59,8 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 238);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -118,7 +120,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(254, 136);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(254, 162);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // descriptionLabel
@@ -145,7 +147,7 @@
             this.descriptionBox.Multiline = true;
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.descriptionBox.Size = new System.Drawing.Size(248, 110);
+            this.descriptionBox.Size = new System.Drawing.Size(248, 136);
             this.descriptionBox.TabIndex = 1;
             // 
             // decisionPanel
@@ -153,20 +155,23 @@
             this.decisionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.decisionPanel.AutoSize = true;
             this.decisionPanel.Controls.Add(this.addNewDecisionButton);
-            this.decisionPanel.Location = new System.Drawing.Point(3, 180);
+            this.decisionPanel.Location = new System.Drawing.Point(3, 206);
             this.decisionPanel.Name = "decisionPanel";
-            this.decisionPanel.Size = new System.Drawing.Size(254, 55);
+            this.decisionPanel.Size = new System.Drawing.Size(254, 29);
             this.decisionPanel.TabIndex = 2;
             // 
             // addNewDecisionButton
             // 
             this.addNewDecisionButton.AutoSize = true;
+            this.decisionPanel.SetFlowBreak(this.addNewDecisionButton, true);
             this.addNewDecisionButton.Location = new System.Drawing.Point(3, 3);
             this.addNewDecisionButton.Name = "addNewDecisionButton";
             this.addNewDecisionButton.Size = new System.Drawing.Size(101, 23);
             this.addNewDecisionButton.TabIndex = 0;
             this.addNewDecisionButton.Text = "Add new decision";
+            this.toolTipHelper.SetToolTip(this.addNewDecisionButton, "trololo");
             this.addNewDecisionButton.UseVisualStyleBackColor = true;
             // 
             // EntityEditor
@@ -177,6 +182,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "EntityEditor";
             this.Text = "EntityEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EntityEditor_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -200,5 +206,6 @@
         private System.Windows.Forms.TextBox descriptionBox;
         private System.Windows.Forms.FlowLayoutPanel decisionPanel;
         private System.Windows.Forms.Button addNewDecisionButton;
+        private System.Windows.Forms.ToolTip toolTipHelper;
     }
 }

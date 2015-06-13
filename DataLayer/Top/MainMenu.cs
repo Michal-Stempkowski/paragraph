@@ -30,5 +30,18 @@ namespace DataLayer.Top
 
             return entityMenu;
         }
+
+        public bool InitEditor(string destination)
+        {
+            return true;
+        }
+
+        public IEntityEditorMenu StartEditor(string destination)
+        {
+            var entityEditorMenu = new EntityEditorMenu(_provider, _stateManager);
+            entityEditorMenu.LoadSchema(destination);
+
+            return entityEditorMenu;
+        }
     }
 }

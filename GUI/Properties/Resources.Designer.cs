@@ -77,5 +77,14 @@ namespace GUI.Properties {
                 return ResourceManager.GetString("ExitApplicationTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select existing or create new file.
+        /// </summary>
+        internal static string GuiHelper_ShowEditorFileChooser_Select_existing_or_create_new_file {
+            get {
+                return ResourceManager.GetString("GuiHelper_ShowEditorFileChooser_Select_existing_or_create_new_file", resourceCulture);
+            }
+        }
     }
 }
