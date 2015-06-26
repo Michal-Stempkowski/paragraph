@@ -103,7 +103,7 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Entity";
-            this.Text = "Entity";
+            this.Text = "Paragraph";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this._onClosing);
             this.Load += new System.EventHandler(this.Entity_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

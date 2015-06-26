@@ -15,7 +15,7 @@ namespace GUI
 {
     public partial class Entity : Form
     {
-        private readonly IEntityMenu _entityMenu;
+        private readonly IEntityMenu _entityMenu; 
         private readonly Main _mainMenuForm;
 
         public Entity(IEntityMenu entityMenu, Main mainMenuForm)
@@ -37,7 +37,8 @@ namespace GUI
             {
                 Text = decision.Description,
                 Visible = decision.IsVisible,
-                Tag = decision
+                Tag = decision,
+                AutoSize = true
             }))
             {
                 button.Click += (sender, args) =>

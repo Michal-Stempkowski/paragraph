@@ -30,14 +30,14 @@ namespace GUI
             {
                 new Decision
                 {
-                    Description = "Description1",
+                    Description = "Otwórz drzwi",
                     Destination = @"path/to/room.room",
                     Effect = Decision.NoEffect,
                     IsVisible = true
                 },
                 new Decision
                 {
-                    Description = "Description2",
+                    Description = "Użyj kamienia przywołania [zużywa 1 klejnot dusz]",
                     Destination = @"path.room",
                     Effect = x => decisionsEntities[1].Description = "Changed",
                     IsVisible = true
@@ -47,19 +47,19 @@ namespace GUI
             var room =new RoomSchema
             {
                 Name = "Namke1",
-                Description = "Some description",
+                Description = "Wkroczyłeś do mrocznego pomieszczenia. Przed sobą dostrzegasz potężne dębowe drzwi.",
                 Decisions = new List<DecisionSchema>
                 {
                     new DecisionSchema
                     {
-                        Description = "Decision 1 description",
+                        Description = "Otwórz drzwi",
                         Destination = decisionsEntities[0].Destination,
                         VisibilityRequirements = new ExpressionTrue(),
                         Effect = new ExpressionAssign("test", "true")
                     },
                     new DecisionSchema
                     {
-                        Description = "Second description",
+                        Description = "Użyj kamienia przywołania [zużywa 1 klejnot dusz]",
                         Destination = decisionsEntities[1].Destination,
                         VisibilityRequirements = new ExpressionTrue(),
                         Effect = new ExpressionTrue()
@@ -74,7 +74,7 @@ namespace GUI
             mainMenu.StartGame(Arg.Any<string>()).Returns(entityMenu);
             mainMenu.StartEditor(Arg.Any<string>()).Returns(entityEditorMenu);
 
-            entityMenu.DescritptionBarContent.Returns("Sample description");
+            entityMenu.DescritptionBarContent.Returns("Wkroczyłeś do mrocznego pomieszczenia. Przed sobą dostrzegasz potężne dębowe drzwi.");
             entityMenu.GetAvailableDecisions().Returns(decisionsEntities);
 
             entityEditorMenu.CurrentSchema.Returns(room);

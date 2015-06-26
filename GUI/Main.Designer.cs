@@ -59,10 +59,11 @@
             // 
             // NewGameButton
             // 
-            this.NewGameButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.NewGameButton.Location = new System.Drawing.Point(265, 3);
+            this.NewGameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.NewGameButton.AutoSize = true;
+            this.NewGameButton.Location = new System.Drawing.Point(210, 3);
             this.NewGameButton.Name = "NewGameButton";
-            this.NewGameButton.Size = new System.Drawing.Size(75, 23);
+            this.NewGameButton.Size = new System.Drawing.Size(184, 125);
             this.NewGameButton.TabIndex = 0;
             this.NewGameButton.Text = "NewGame";
             this.NewGameButton.UseVisualStyleBackColor = true;
@@ -70,11 +71,11 @@
             // 
             // LoadGameButton
             // 
-            this.LoadGameButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.LoadGameButton.Location = new System.Drawing.Point(265, 134);
+            this.LoadGameButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.LoadGameButton.Location = new System.Drawing.Point(210, 134);
             this.LoadGameButton.Name = "LoadGameButton";
             this.LoadGameButton.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.LoadGameButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadGameButton.Size = new System.Drawing.Size(184, 125);
             this.LoadGameButton.TabIndex = 1;
             this.LoadGameButton.Text = "LoadGame";
             this.LoadGameButton.UseVisualStyleBackColor = true;
@@ -82,10 +83,10 @@
             // 
             // EditorButton
             // 
-            this.EditorButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.EditorButton.Location = new System.Drawing.Point(265, 265);
+            this.EditorButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.EditorButton.Location = new System.Drawing.Point(210, 265);
             this.EditorButton.Name = "EditorButton";
-            this.EditorButton.Size = new System.Drawing.Size(75, 23);
+            this.EditorButton.Size = new System.Drawing.Size(184, 125);
             this.EditorButton.TabIndex = 2;
             this.EditorButton.Text = "Editor";
             this.EditorButton.UseVisualStyleBackColor = true;
@@ -93,10 +94,10 @@
             // 
             // ExitButton
             // 
-            this.ExitButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ExitButton.Location = new System.Drawing.Point(265, 396);
+            this.ExitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.ExitButton.Location = new System.Drawing.Point(210, 396);
             this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(75, 23);
+            this.ExitButton.Size = new System.Drawing.Size(184, 125);
             this.ExitButton.TabIndex = 3;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
@@ -109,10 +110,11 @@
             this.ClientSize = new System.Drawing.Size(629, 548);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "Paragraph";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
