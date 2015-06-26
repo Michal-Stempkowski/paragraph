@@ -12,7 +12,11 @@ namespace DataLayer.Schema
     {
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            return expr.Args.Aggregate(true, (currentState, x) => currentState && x.TranslateToBool(x, stateManager));
+            return expr.Args
+                .OrderBy(x => x.Key)
+                .Select(x => x.Value)
+                .Aggregate(true, (currentState, x) => currentState && 
+                    x.TranslateToBool(x, stateManager));
         }
     }
 }

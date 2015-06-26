@@ -57,9 +57,10 @@ namespace Tests
             {
                 Description = description, 
                 Destination = destination, 
-                VisibilityRequirements = new ExpressionOr{Args = new List<BoolExpandableExpression>
+                VisibilityRequirements = new ExpressionOr{Args = new Dictionary<int, BoolExpandableExpression>()
                 {
-                    new ExpressionVariableExists(DefaultVariable), new ExpressionTrue()
+                    { 0, new ExpressionVariableExists(DefaultVariable) },
+                    { 1, new ExpressionTrue() }
                 }}
             };
         }

@@ -93,7 +93,7 @@ namespace Tests
         {
             _sut.InitializeUnit(_sut.GetType().Assembly);
             BoolExpandableExpression expr = new ExpressionOr();
-            expr.Args.Add(new ExpressionFalse());
+            expr.Args.Add(0, new ExpressionFalse());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
         }
 
@@ -102,8 +102,8 @@ namespace Tests
         {
             _sut.InitializeUnit(_sut.GetType().Assembly);
             BoolExpandableExpression expr = new ExpressionOr();
-            expr.Args.Add(new ExpressionFalse());
-            expr.Args.Add(new ExpressionTrue());
+            expr.Args.Add(0, new ExpressionFalse());
+            expr.Args.Add(1, new ExpressionTrue());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
         }
 
@@ -120,7 +120,7 @@ namespace Tests
         {
             _sut.InitializeUnit(_sut.GetType().Assembly);
             BoolExpandableExpression expr = new ExpressionAnd();
-            expr.Args.Add(new ExpressionTrue());
+            expr.Args.Add(0, new ExpressionTrue());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
         }
 
@@ -129,8 +129,8 @@ namespace Tests
         {
             _sut.InitializeUnit(_sut.GetType().Assembly);
             BoolExpandableExpression expr = new ExpressionAnd();
-            expr.Args.Add(new ExpressionTrue());
-            expr.Args.Add(new ExpressionFalse());
+            expr.Args.Add(0, new ExpressionTrue());
+            expr.Args.Add(1, new ExpressionFalse());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
         }
 
@@ -140,10 +140,10 @@ namespace Tests
             _sut.InitializeUnit(_sut.GetType().Assembly);
             BoolExpandableExpression expr = new ExpressionNot();
 
-            expr.Args.Insert(0, new ExpressionTrue());
+            expr.Args.Add(0, new ExpressionTrue());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
 
-            expr.Args.Insert(0, new ExpressionFalse());
+            expr.Args.Add(0, new ExpressionFalse());
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
         }
 

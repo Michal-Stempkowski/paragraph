@@ -14,13 +14,13 @@ namespace DataLayer.Schema
         protected BoolExpandableExpression()
         {
             Name = this.GetType().Name;
-            Args = new List<BoolExpandableExpression>();
-            SimpleArgs = new List<string>();
+            Args = new Dictionary<int, BoolExpandableExpression>();
+            SimpleArgs = new Dictionary<int, string>();
         }
 
         public string Name { get; set; }
-        public List<BoolExpandableExpression> Args { get; set; }
-        public List<string> SimpleArgs { get; set; }
+        public Dictionary<int, BoolExpandableExpression> Args { get; set; }
+        public Dictionary<int, string> SimpleArgs { get; set; }
 
         public virtual bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
