@@ -38,6 +38,19 @@ namespace DataLayer.Schema
         {
             throw new YouShouldUseProperTranslatorInsteadOfCallingThisFunctionDirectlyException();
         }
+
+        public static T Convert<T>(BoolExpandableExpression expression)
+            where T : BoolExpandableExpression, new()
+        {
+            return new T()
+            {
+                Args = expression.Args.ToDictionary(
+                    x => x.Key,
+                    x => x.Value), // TODO: DO NOT! Add backward translation switch'o'case, use it in validation step (shallow)
+                Name = expression.Name,
+                SimpleArgs = expression.SimpleArgs
+            };
+        }
     }
 
     public class BoolExpandableExpressionImpl<T> : BoolExpandableExpression where T : BoolExpandableExpression, new()

@@ -59,7 +59,8 @@ namespace Tests
         {
             var value = "5";
             var sut = new ExpressionAssign(VariableName, value);
-            var result = ExpressionAssign.Convert(SerializeAndDeserialize(sut));
+            var result = BoolExpandableExpression.Convert<ExpressionAssign>(
+                SerializeAndDeserialize(sut));
 
             Assert.That(result.VariableName, Is.EqualTo(sut.VariableName));
             Assert.That(result.Value, Is.EqualTo(sut.Value));

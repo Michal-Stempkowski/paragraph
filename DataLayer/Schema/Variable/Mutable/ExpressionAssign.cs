@@ -48,17 +48,5 @@ namespace DataLayer.Schema.Variable.Mutable
 
             return true;
         }
-
-        public static ExpressionAssign Convert(BoolExpandableExpression expression)
-        {
-            return new ExpressionAssign()
-            {
-                Args = expression.Args.ToDictionary(
-                    x => x.Key,
-                    x => x.Value), // TODO: DO NOT! Add backward translation switch'o'case, use it in validation step (shallow)
-                Name = expression.Name,
-                SimpleArgs = expression.SimpleArgs
-            };
-        }
     }
 }
