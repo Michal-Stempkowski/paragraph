@@ -140,10 +140,10 @@ namespace Tests
             _sut.InitializeUnit(_sut.GetType().Assembly);
             BoolExpandableExpression expr = new ExpressionNot();
 
-            expr.Args.Add(0, new ExpressionTrue());
+            expr.Args[0] = new ExpressionTrue();
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.False);
 
-            expr.Args.Add(0, new ExpressionFalse());
+            expr.Args[0] = new ExpressionFalse();
             Assert.That(_sut.ExpandToBool(expr, _stateManager), Is.True);
         }
 

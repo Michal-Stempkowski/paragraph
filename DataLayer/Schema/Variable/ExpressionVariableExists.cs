@@ -16,7 +16,11 @@ namespace DataLayer.Schema.Variable
             //SimpleArgs.Add(name);
         }
 
-        public string VariableName { get; set; }
+        public string VariableName
+        {
+            get { return SimpleArgs[0]; }
+            set { SimpleArgs[0] = value; }
+        }
 
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {

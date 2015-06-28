@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Dynamic;
+using System.Linq;
 using DataLayer.Logic;
 using DataLayer.Schema.Validation;
 
@@ -10,9 +11,18 @@ namespace DataLayer.Schema.Variable.Mutable
     public class ExpressionAssign : BoolExpandableExpressionImpl<ExpressionAssign>
     {
         [VariableIdentifier]
-        public string VariableName { get; set; }
+        public string VariableName
+        {
+            get { return SimpleArgs[0]; }
+            set { SimpleArgs[0] = value; }
+        }
+
         [VariableIdentifier]
-        public string Value { get; set; }
+        public string Value
+        {
+            get { return SimpleArgs[1]; }
+            set { SimpleArgs[1] = value; }
+        }
 
         public static ExpressionAssign Create<T>(string variableName, T value)
         {
@@ -37,6 +47,18 @@ namespace DataLayer.Schema.Variable.Mutable
             stateManager.SetString(typedExpr.VariableName, typedExpr.Value);
 
             return true;
+        }
+
+        public static ExpressionAssign Convert(BoolExpandableExpression expression)
+        {
+            return new ExpressionAssign()
+            {
+                Args = expression.Args.ToDictionary(
+                    x => x.Key,
+                    x => x.Value), // TODO: DO NOT! Add backward translation switch'o'case, use it in validation step (shallow)
+                Name = expression.Name,
+                SimpleArgs = expression.SimpleArgs
+            };
         }
     }
 }

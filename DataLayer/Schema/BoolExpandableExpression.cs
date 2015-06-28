@@ -22,6 +22,18 @@ namespace DataLayer.Schema
         public Dictionary<int, BoolExpandableExpression> Args { get; set; }
         public Dictionary<int, string> SimpleArgs { get; set; }
 
+        public BoolExpandableExpression DeepCopy()
+        {
+            return new BoolExpandableExpression()
+            {
+                Args = Args.ToDictionary(
+                    pair => pair.Key, 
+                    pair => pair.Value.DeepCopy()),
+                Name = Name,
+                SimpleArgs = SimpleArgs
+            };
+        }
+
         public virtual bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
             throw new YouShouldUseProperTranslatorInsteadOfCallingThisFunctionDirectlyException();
