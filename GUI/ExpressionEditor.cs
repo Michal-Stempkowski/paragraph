@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Schema;
+using DataLayer.Top;
 
 namespace GUI
 {
     public partial class ExpressionEditor : Form
     {
+        private readonly IExpressionEditorMenu _expressionEditorMenu;
         private TreeNode _draggedNode;
-        private ContextMenu _nodeMenu;
+        private readonly ContextMenu _nodeMenu;
         private const string RootLabel = "(root)";
 
         public BoolExpandableExpression Expression { get; private set; }
 
-        public ExpressionEditor(BoolExpandableExpression expression)
+        public ExpressionEditor(BoolExpandableExpression expression, IExpressionEditorMenu expressionEditorMenu)
         {
+            _expressionEditorMenu = expressionEditorMenu;
             Expression = expression;
             _draggedNode = null;
 
@@ -35,7 +39,16 @@ namespace GUI
         {
             var createItem = new MenuItem("Create child", (sender, args) =>
             {
-                        
+                var typeChooser = new ExpressionTypeChooser(_expressionEditorMenu);
+
+                if (typeChooser.ShowDialog(this) == DialogResult.OK)
+                {
+                    BuildTree(_expressionTree.SelectedNode, typeChooser.NewExpression);
+
+                    EditSimpleArgs(typeChooser.NewExpression);
+
+                    _expressionTree.SelectedNode.ExpandAll();
+                }
             });
 
             var deleteItem = new MenuItem("Delete", (sender, args) => _expressionTree.SelectedNode.Remove());
@@ -82,6 +95,29 @@ namespace GUI
             };
 
             return contextMenu;
+        }
+
+        private void EditSimpleArgs(BoolExpandableExpression newExpression)
+        {
+//            var simpleArgEditor = null;
+            switch (newExpression.Name)
+            {
+                case "ExpressionTrue":
+                case "ExpressionFalse":
+                case "ExpressionOr":
+                case "ExpressionAnd":
+                case "ExpressionNot":
+                    return;
+                case "ExpressionVariableExists":
+                case "ExpressionIntCheck":
+                case "ExpressionStringCheck":
+                case "ExpressionFloatCheck":
+                case "ExpressionAssign":
+                case "ExpressionIntModify":
+                case "ExpressionFloatModify":
+                default:
+                    throw new EventLogException();
+            }
         }
 
         private void ExpressionToTree(BoolExpandableExpression expression)

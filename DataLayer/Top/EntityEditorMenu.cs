@@ -21,6 +21,8 @@ namespace DataLayer.Top
 
         public RoomSchema CurrentSchema { get; private set; }
 
+        public IExpressionEditorMenu ExpressionEditorMenu { get; private set; }
+
         public void LoadSchema(string destination)
         {
             throw new NotImplementedException();

@@ -72,6 +72,10 @@ namespace DataLayer.Schema
         {
             return (expr, stateManager) => new T().TranslateToBool(expr, stateManager);
         }
+        public static Func<BoolExpandableExpression> CreateInstance()
+        {
+            return () => new T();
+        }
     }
 
     public class YouShouldUseProperTranslatorInsteadOfCallingThisFunctionDirectlyException : Exception

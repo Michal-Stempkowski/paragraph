@@ -45,7 +45,7 @@ namespace GUI
 
         private BoolExpandableExpression ShowExpressionEditor(BoolExpandableExpression expression)
         {
-            var expressionEditor = new ExpressionEditor(expression);
+            var expressionEditor = new ExpressionEditor(expression, _entityEditorMenu.ExpressionEditorMenu);
 
             expressionEditor.ShowDialog(this);
             

@@ -91,8 +91,10 @@
     <Compile Include="Storage\FileStorageSupervisor.cs" />
     <Compile Include="Top\EntityEditorMenu.cs" />
     <Compile Include="Top\EntityMenu.cs" />
+    <Compile Include="Top\ExpressionEditorMenu.cs" />
     <Compile Include="Top\IEntityEditorMenu.cs" />
     <Compile Include="Top\IEntityMenu.cs" />
+    <Compile Include="Top\IExpressionEditorMenu.cs" />
     <Compile Include="Top\IMainMenu.cs" />
     <Compile Include="Top\MainMenu.cs" />
   </ItemGroup>

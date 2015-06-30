@@ -9,14 +9,18 @@ using DataLayer.Schema;
 namespace DataLayer.Core
 {
     using TranslatorFuncType = Func<BoolExpandableExpression, IStateManager, bool>;
+    using CreatorFuncType = Func<BoolExpandableExpression>;
+
     public class CoreTranslator : ICoreTranslator
     {
         
         private readonly IDictionary<string, TranslatorFuncType> _translatorFuncs;
+        private readonly IDictionary<string, CreatorFuncType> _creatorFuncs;
 
         public CoreTranslator()
         {
             _translatorFuncs = new Dictionary<string, TranslatorFuncType>();
+            _creatorFuncs = new Dictionary<string, CreatorFuncType>();
         }
 
         public void InitializeUnit(Assembly assembly)
@@ -34,7 +38,14 @@ namespace DataLayer.Core
                         .Invoke(null, null)
                         as TranslatorFuncType;
 
+                    var creator = type.BaseType.GetMethods()
+                        .Where(m => m.Name == "CreateInstance")
+                        .Single(m => m.GetParameters().Length == 0)
+                        .Invoke(null, null)
+                        as CreatorFuncType;
+
                     _translatorFuncs.Add(type.Name, translator);
+                    _creatorFuncs.Add(type.Name, creator);
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -62,6 +73,52 @@ namespace DataLayer.Core
             }
 
             return translator(expr, stateManager);
+        }
+
+        public T CreateInstance<T>(BoolExpandableExpression templ = null)
+            where T : BoolExpandableExpression
+        {
+            CreatorFuncType creator;
+            var typeName = typeof(T).Name;
+
+            if (!_creatorFuncs.TryGetValue(typeName, out creator))
+            {
+                throw new NotRegisteredExpressionException(typeName);
+            }
+
+            var result = creator() as T;
+
+            if (result == null)
+            {
+                throw new NotRegisteredExpressionException(typeName);
+            }
+
+            if (templ != null)
+            {
+                result.SimpleArgs = new Dictionary<int, string>(templ.SimpleArgs);
+                result.Args = new Dictionary<int, BoolExpandableExpression>(templ.Args);
+            }
+
+            return result;
+        }
+
+        public BoolExpandableExpression CreateInstanceByName(string name)
+        {
+            CreatorFuncType creator;
+
+            if (!_creatorFuncs.TryGetValue(name, out creator))
+            {
+                throw new NotRegisteredExpressionException(name);
+            }
+
+            var result = creator();
+
+            if (result == null)
+            {
+                throw new NotRegisteredExpressionException(name);
+            }
+
+            return result;
         }
     }
 

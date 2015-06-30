@@ -72,6 +72,12 @@
     <Compile Include="ExpressionEditor.Designer.cs">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExpressionTypeChooser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExpressionTypeChooser.Designer.cs">
+      <DependentUpon>ExpressionTypeChooser.cs</DependentUpon>
+    </Compile>
     <Compile Include="GuiHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExpressionEditor.resx">
       <DependentUpon>ExpressionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExpressionTypeChooser.resx">
+      <DependentUpon>ExpressionTypeChooser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

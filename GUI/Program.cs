@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataLayer.Core;
 using DataLayer.Logic;
 using DataLayer.Schema;
 using DataLayer.Schema.Variable;
@@ -86,6 +87,11 @@ namespace GUI
             var entityMenu = Substitute.For<IEntityMenu>();
             var entityEditorMenu = Substitute.For<IEntityEditorMenu>();
 
+            ICoreTranslator coreTranslator = new CoreTranslator();
+            coreTranslator.InitializeUnit(coreTranslator.GetType().Assembly);
+
+            IExpressionEditorMenu expressionEditorMenu = new ExpressionEditorMenu(coreTranslator);
+
             mainMenu.StartGame(Arg.Any<string>()).Returns(entityMenu);
             mainMenu.StartEditor(Arg.Any<string>()).Returns(entityEditorMenu);
 
@@ -93,6 +99,8 @@ namespace GUI
             entityMenu.GetAvailableDecisions().Returns(decisionsEntities);
 
             entityEditorMenu.CurrentSchema.Returns(room);
+
+            entityEditorMenu.ExpressionEditorMenu.Returns(expressionEditorMenu);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
