@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Logic;
 using DataLayer.Schema;
+using DataLayer.Schema.Variable;
 using DataLayer.Schema.Variable.Mutable;
 using DataLayer.Top;
 using NSubstitute;
@@ -55,7 +56,21 @@ namespace GUI
                         Description = "Otwórz drzwi",
                         Destination = decisionsEntities[0].Destination,
                         VisibilityRequirements = new ExpressionTrue(),
-                        Effect = new ExpressionAssign("test", "true")
+                        Effect = new ExpressionOr()
+                        {
+                            Args =
+                            {
+                                {0, new ExpressionNot()
+                                {
+                                    Args = 
+                                    {
+                                        {0, new ExpressionVariableExists("Lol")}
+                                    }
+                                }},
+                                {1, new ExpressionAssign("test", "true") }
+                            }
+                        }
+                            
                     },
                     new DecisionSchema
                     {

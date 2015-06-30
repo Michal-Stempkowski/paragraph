@@ -28,16 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Franek");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Jasiu");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Staszek", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
             this._expressionTree = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
             // _expressionTree
             // 
+            this._expressionTree.AllowDrop = true;
             this._expressionTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this._expressionTree.Location = new System.Drawing.Point(0, 0);
             this._expressionTree.Name = "_expressionTree";
+            treeNode1.Name = "Node1";
+            treeNode1.Text = "Franek";
+            treeNode2.Name = "Node2";
+            treeNode2.Text = "Jasiu";
+            treeNode3.Name = "Staszek";
+            treeNode3.Text = "Staszek";
+            this._expressionTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            this._expressionTree.ShowPlusMinus = false;
             this._expressionTree.Size = new System.Drawing.Size(284, 262);
             this._expressionTree.TabIndex = 0;
+            this._expressionTree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this._expressionTree_BeforeCollapse);
+            this._expressionTree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this._expressionTree_ItemDrag);
+            this._expressionTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this._expressionTree_NodeMouseClick);
+            this._expressionTree.DragDrop += new System.Windows.Forms.DragEventHandler(this._expressionTree_DragDrop);
+            this._expressionTree.DragEnter += new System.Windows.Forms.DragEventHandler(this._expressionTree_DragEnter);
+            this._expressionTree.DragOver += new System.Windows.Forms.DragEventHandler(this._expressionTree_DragOver);
             // 
             // ExpressionEditor
             // 

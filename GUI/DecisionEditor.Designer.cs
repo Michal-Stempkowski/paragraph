@@ -149,6 +149,7 @@
             this._effectButton.TabIndex = 7;
             this._effectButton.Text = "Show";
             this._effectButton.UseVisualStyleBackColor = true;
+            this._effectButton.Click += new System.EventHandler(this._effectButton_Click);
             // 
             // DecisionEditor
             // 

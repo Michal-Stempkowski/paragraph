@@ -51,6 +51,19 @@ namespace DataLayer.Schema
                 SimpleArgs = expression.SimpleArgs
             };
         }
+
+        public override string ToString()
+        {
+            return 
+                Name + 
+                "(" +
+                String.Join(
+                    ", ",
+                    SimpleArgs
+                    .OrderBy(x => x.Key)
+                    .Select(x => x.Value)) +
+                ")";
+        }
     }
 
     public class BoolExpandableExpressionImpl<T> : BoolExpandableExpression where T : BoolExpandableExpression, new()

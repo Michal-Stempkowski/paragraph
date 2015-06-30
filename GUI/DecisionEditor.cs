@@ -40,7 +40,21 @@ namespace GUI
 
         private void VisibilityRequirementsButtonOnClick(object sender, EventArgs eventArgs)
         {
-            throw new NotImplementedException();
+            _decision.VisibilityRequirements = ShowExpressionEditor(_decision.VisibilityRequirements);
+        }
+
+        private BoolExpandableExpression ShowExpressionEditor(BoolExpandableExpression expression)
+        {
+            var expressionEditor = new ExpressionEditor(expression);
+
+            expressionEditor.ShowDialog(this);
+            
+            return expressionEditor.Expression;
+        }
+
+        private void _effectButton_Click(object sender, EventArgs e)
+        {
+            _decision.Effect = ShowExpressionEditor(_decision.Effect);
         }
 
         private void GuiToDecision()
