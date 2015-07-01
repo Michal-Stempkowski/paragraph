@@ -9,10 +9,69 @@ namespace DataLayer.Schema.Variable.Mutable
     public class ExpressionFloatModify : BoolExpandableExpressionImpl<ExpressionFloatModify>
     {
         [VariableIdentifier]
-        public string VariableName { get; set; }
-        public ExprParam Left;
-        public ExprParam Right;
-        public ModifyOperType OperType;
+        public string VariableName
+        {
+            get { return SimpleArgs[0]; }
+            set { SimpleArgs[0] = value; }
+        }
+
+        public ExprParam Left
+        {
+            get
+            {
+                ExprParam.Source paramSource;
+
+                Enum.TryParse(SimpleArgs[1], out paramSource);
+
+                return new ExprParam
+                {
+                    ParamSource = paramSource,
+                    Value = SimpleArgs[2]
+                };
+            }
+            set
+            {
+                SimpleArgs[1] = value.ParamSource.ToString();
+                SimpleArgs[2] = value.Value;
+            }
+        }
+
+        public ExprParam Right
+        {
+            get
+            {
+                ExprParam.Source paramSource;
+
+                Enum.TryParse(SimpleArgs[3], out paramSource);
+
+                return new ExprParam
+                {
+                    ParamSource = paramSource,
+                    Value = SimpleArgs[4]
+                };
+            }
+            set
+            {
+                SimpleArgs[3] = value.ParamSource.ToString();
+                SimpleArgs[4] = value.Value;
+            }
+        }
+
+        public ModifyOperType OperType
+        {
+            get
+            {
+                ModifyOperType operType;
+
+                Enum.TryParse(SimpleArgs[5], out operType);
+
+                return operType;
+            }
+            set
+            {
+                SimpleArgs[5] = value.ToString();
+            }
+        }
 
         public ExpressionFloatModify()
         {

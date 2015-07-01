@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using DataLayer.Logic;
 using DataLayer.Schema.Validation;
 
@@ -8,10 +9,39 @@ namespace DataLayer.Schema.Variable
     public class ExpressionIntCheck : BoolExpandableExpressionImpl<ExpressionIntCheck>
     {
         [VariableIdentifier]
-        public string VariableName { get; set; }
+        public string VariableName
+        {
+            get { return SimpleArgs[0]; }
+            set { SimpleArgs[0] = value; }
+        }
 
-        public int Value;
-        public CheckOperType OperType;
+        public int Value
+        {
+            get
+            {
+                int result;
+
+                int.TryParse(SimpleArgs[1], out result);
+                return result;
+            }
+            set { SimpleArgs[1] = value.ToString(CultureInfo.InvariantCulture); }
+        }
+
+        public CheckOperType OperType
+        {
+            get
+            {
+                CheckOperType operType;
+
+                Enum.TryParse(SimpleArgs[2], out operType);
+
+                return operType;
+            }
+            set
+            {
+                SimpleArgs[2] = value.ToString();
+            }
+        }
 
         public ExpressionIntCheck()
         {
