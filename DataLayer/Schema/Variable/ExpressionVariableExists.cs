@@ -7,7 +7,7 @@ namespace DataLayer.Schema.Variable
     {
         public ExpressionVariableExists()
         {
-            
+            VariableName = "";
         }
 
         public ExpressionVariableExists(string name)

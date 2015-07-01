@@ -45,7 +45,9 @@ namespace DataLayer.Schema.Variable
 
         public ExpressionFloatCheck()
         {
-            
+            VariableName = "";
+            Value = 0f;
+            OperType = CheckOperType.Equal;
         }
         public ExpressionFloatCheck(string variableName, float value, CheckOperType operType)
         {

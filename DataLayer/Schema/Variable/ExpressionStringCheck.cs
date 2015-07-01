@@ -44,7 +44,9 @@ namespace DataLayer.Schema.Variable
 
         public ExpressionStringCheck()
         {
-            
+            VariableName = "";
+            Value = "";
+            OperType = CheckOperType.Equal;
         }
         public ExpressionStringCheck(string variableName, string value, CheckOperType operType)
         {

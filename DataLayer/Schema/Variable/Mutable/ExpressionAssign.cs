@@ -31,7 +31,8 @@ namespace DataLayer.Schema.Variable.Mutable
 
         public ExpressionAssign()
         {
-            
+            VariableName = "";
+            Value = "";
         }
         
         public ExpressionAssign(string variableName, string value)

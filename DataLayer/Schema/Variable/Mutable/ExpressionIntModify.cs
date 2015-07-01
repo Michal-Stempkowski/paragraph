@@ -74,7 +74,18 @@ namespace DataLayer.Schema.Variable.Mutable
 
         public ExpressionIntModify()
         {
-            
+            VariableName = "";
+            Left = new ExprParam
+            {
+                ParamSource = ExprParam.Source.Constant,
+                Value = "0"
+            };
+            Right = new ExprParam
+            {
+                ParamSource = ExprParam.Source.Constant,
+                Value = "0"
+            };
+            OperType = ModifyOperType.Add;
         }
 
         private int? _getValueFromWorldstate(string name, IStateManager stateManager)

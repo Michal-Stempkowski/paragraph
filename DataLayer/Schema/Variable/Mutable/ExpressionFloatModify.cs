@@ -75,7 +75,19 @@ namespace DataLayer.Schema.Variable.Mutable
 
         public ExpressionFloatModify()
         {
-            
+            VariableName = "";
+            Left = new ExprParam
+            {
+                ParamSource = ExprParam.Source.Constant,
+                Value = "0f"
+            };
+            Right = new ExprParam
+            {
+                ParamSource = ExprParam.Source.Constant,
+                Value = "0f"
+            };
+            OperType = ModifyOperType.Add;
+
         }
 
         private float? _getValueFromWorldstate(string name, IStateManager stateManager)
