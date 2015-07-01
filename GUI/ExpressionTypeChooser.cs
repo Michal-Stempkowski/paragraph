@@ -25,6 +25,7 @@ namespace GUI
 
             typeCombo.Items.Clear();
             typeCombo.Items.AddRange(_expressionEditorMenu.ExpressionNames.ToArray());
+            typeCombo.SelectedIndex = 0;
 
             NewExpression = null;
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Schema;
+using GUI;
 
 namespace GUI
 {
@@ -75,6 +76,37 @@ namespace GUI
         {
             
         }
+    }
+
+    class SimpleEnumArgManager : SimpleArgManager
+    {
+        public override void Create(SimpleArgEditor editor)
+        {
+            base.Create(editor);
+
+            _comboBox = new ComboBox
+            {
+                Dock = DockStyle.Top,
+                AutoSize = true
+            };
+
+            _comboBox.Items.AddRange(GetInstances());
+
+            _comboBox.SelectedItem = GetValue(editor.Expression);
+            editor.TableLayoutPanel.Controls.Add(_comboBox, 1, Index);
+        }
+
+        public override void Dispose(SimpleArgEditor editor)
+        {
+            base.Dispose(editor);
+
+            SetValue(editor.Expression, _comboBox.SelectedItem);
+        }
+
+        private ComboBox _comboBox;
+        public Func<BoolExpandableExpression, object> GetValue { get; set; }
+        public Action<BoolExpandableExpression, object> SetValue;
+        public Func<object[]> GetInstances { get; set; }
     }
 
     public class SimpleStringArgManager : SimpleArgManager

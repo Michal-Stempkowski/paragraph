@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -150,60 +151,27 @@ namespace GUI
                 case "ExpressionNot":
                     return;
                 case "ExpressionVariableExists":
-                    simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager()
-                    {
-                        Index = 1,
-                        Label = "Variable name: ",
-                        GetValue = (expr) =>
-                        {
-                            var typedExpression =  expr as ExpressionVariableExists;
-                            return typedExpression.VariableName;
-                        },
-                        SetValue = (expr, val) =>
-                        {
-                            var typedExpression = expr as ExpressionVariableExists;
-                            typedExpression.VariableName = val;
-                        }
-                    });
+                    ServeExpressionVariableExists(simpleArgEditor);
                     break;
                 case "ExpressionAssign":
-                    simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager()
-                    {
-                        Index = 1,
-                        Label = "Variable name: ",
-                        GetValue = (expr) =>
-                        {
-                            var typedExpression =  expr as ExpressionAssign;
-                            return typedExpression.VariableName;
-                        },
-                        SetValue = (expr, val) =>
-                        {
-                            var typedExpression = expr as ExpressionAssign;
-                            typedExpression.VariableName = val;
-                        }
-                    });
-
-                    simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager()
-                    {
-                        Index = 2,
-                        Label = "Variable value: ",
-                        GetValue = (expr) =>
-                        {
-                            var typedExpression = expr as ExpressionAssign;
-                            return typedExpression.Value;
-                        },
-                        SetValue = (expr, val) =>
-                        {
-                            var typedExpression = expr as ExpressionAssign;
-                            typedExpression.Value = val;
-                        }
-                    });
+                    ServeExpressionAssign(simpleArgEditor);
                     break;
+
                 case "ExpressionIntCheck":
+                    ServeExpressionIntCheck(simpleArgEditor);
+                    break;
                 case "ExpressionStringCheck":
+                    ServeExpressionStringCheck(simpleArgEditor);
+                    break;
                 case "ExpressionFloatCheck":
+                    ServeExpressionFloatCheck(simpleArgEditor);
+                    break;
                 case "ExpressionIntModify":
+                    ServeExpressionIntModify(simpleArgEditor);
+                    break;
                 case "ExpressionFloatModify":
+                    ServeExpressionFloatModify(simpleArgEditor);
+                    break;
                 default:
                     break;
             }
@@ -214,6 +182,452 @@ namespace GUI
 //            {
 //                expression.SimpleArgs = simpleArgEditor.Expression.SimpleArgs;
 //            }
+        }
+
+        private static void ServeExpressionIntCheck(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntCheck;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntCheck;
+                    typedExpression.VariableName = val;
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 2,
+                Label = "Operation type: ",
+                GetInstances = () => { return Enum.GetNames(typeof (CheckOperType)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntCheck;
+                    return typedExpression.OperType.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntCheck;
+                    typedExpression.OperType = (CheckOperType) Enum.Parse(typeof (CheckOperType), val.ToString());
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 3,
+                Label = "Variable value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntCheck;
+                    return typedExpression.Value.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntCheck;
+                    typedExpression.Value = int.Parse(val);
+                }
+            });
+        }
+
+        private static void ServeExpressionIntModify(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    typedExpression.VariableName = val;
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 2,
+                Label = "Left source: ",
+                GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    return typedExpression.Left.ParamSource.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    typedExpression.Left = new ExprParam
+                    {
+                        ParamSource = (ExprParam.Source) Enum.Parse(typeof (ExprParam.Source), val.ToString()),
+                        Value = typedExpression.Left.Value
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 3,
+                Label = "Left value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    return typedExpression.Left.Value;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    typedExpression.Left = new ExprParam
+                    {
+                        ParamSource = typedExpression.Left.ParamSource,
+                        Value = val
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 4,
+                Label = "Right source: ",
+                GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    return typedExpression.Right.ParamSource.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    typedExpression.Right = new ExprParam
+                    {
+                        ParamSource = (ExprParam.Source)Enum.Parse(typeof(ExprParam.Source), val.ToString()),
+                        Value = typedExpression.Right.Value
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 5,
+                Label = "Right value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    return typedExpression.Right.Value;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    typedExpression.Right = new ExprParam
+                    {
+                        ParamSource = typedExpression.Right.ParamSource,
+                        Value = val
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 6,
+                Label = "Operation type: ",
+                GetInstances = () => { return Enum.GetNames(typeof(ModifyOperType)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    return typedExpression.OperType.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionIntModify;
+                    typedExpression.OperType = (ModifyOperType)Enum.Parse(typeof(ModifyOperType), val.ToString());
+                }
+            });
+        }
+
+        private static void ServeExpressionFloatModify(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    typedExpression.VariableName = val;
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 2,
+                Label = "Left source: ",
+                GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    return typedExpression.Left.ParamSource.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    typedExpression.Left = new ExprParam
+                    {
+                        ParamSource = (ExprParam.Source)Enum.Parse(typeof(ExprParam.Source), val.ToString()),
+                        Value = typedExpression.Left.Value
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 3,
+                Label = "Left value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    return typedExpression.Left.Value;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    typedExpression.Left = new ExprParam
+                    {
+                        ParamSource = typedExpression.Left.ParamSource,
+                        Value = val
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 4,
+                Label = "Right source: ",
+                GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    return typedExpression.Right.ParamSource.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    typedExpression.Right = new ExprParam
+                    {
+                        ParamSource = (ExprParam.Source)Enum.Parse(typeof(ExprParam.Source), val.ToString()),
+                        Value = typedExpression.Right.Value
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 5,
+                Label = "Right value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    return typedExpression.Right.Value;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    typedExpression.Right = new ExprParam
+                    {
+                        ParamSource = typedExpression.Right.ParamSource,
+                        Value = val
+                    };
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 6,
+                Label = "Operation type: ",
+                GetInstances = () => { return Enum.GetNames(typeof(ModifyOperType)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    return typedExpression.OperType.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatModify;
+                    typedExpression.OperType = (ModifyOperType)Enum.Parse(typeof(ModifyOperType), val.ToString());
+                }
+            });
+        }
+
+        private static void ServeExpressionFloatCheck(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatCheck;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatCheck;
+                    typedExpression.VariableName = val;
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 2,
+                Label = "Operation type: ",
+                GetInstances = () => { return Enum.GetNames(typeof(CheckOperType)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatCheck;
+                    return typedExpression.OperType.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatCheck;
+                    typedExpression.OperType = (CheckOperType)Enum.Parse(typeof(CheckOperType), val.ToString());
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 3,
+                Label = "Variable value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionFloatCheck;
+                    return typedExpression.Value.ToString(CultureInfo.InvariantCulture);
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionFloatCheck;
+                    typedExpression.Value = float.Parse(val);
+                }
+            });
+        }
+
+        private static void ServeExpressionStringCheck(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionStringCheck;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionStringCheck;
+                    typedExpression.VariableName = val;
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleEnumArgManager
+            {
+                Index = 2,
+                Label = "Operation type: ",
+                GetInstances = () => { return Enum.GetNames(typeof(CheckOperType)); },
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionStringCheck;
+                    return typedExpression.OperType.ToString();
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionStringCheck;
+                    typedExpression.OperType = (CheckOperType)Enum.Parse(typeof(CheckOperType), val.ToString());
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 3,
+                Label = "Variable value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionStringCheck;
+                    return typedExpression.Value;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionStringCheck;
+                    typedExpression.Value = val;
+                }
+            });
+        }
+
+        private static void ServeExpressionAssign(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionAssign;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionAssign;
+                    typedExpression.VariableName = val;
+                }
+            });
+
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 2,
+                Label = "Variable value: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionAssign;
+                    return typedExpression.Value;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionAssign;
+                    typedExpression.Value = val;
+                }
+            });
+        }
+
+        private static void ServeExpressionVariableExists(SimpleArgEditor simpleArgEditor)
+        {
+            simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager
+            {
+                Index = 1,
+                Label = "Variable name: ",
+                GetValue = (expr) =>
+                {
+                    var typedExpression = expr as ExpressionVariableExists;
+                    return typedExpression.VariableName;
+                },
+                SetValue = (expr, val) =>
+                {
+                    var typedExpression = expr as ExpressionVariableExists;
+                    typedExpression.VariableName = val;
+                }
+            });
         }
 
         private void ExpressionToTree(BoolExpandableExpression expression)
