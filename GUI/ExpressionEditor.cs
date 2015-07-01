@@ -102,11 +102,39 @@ namespace GUI
             EditSimpleArgs(expression);
 
             TreeToExpression();
+            ExpressionToTree(Expression);
         }
 
         private void TreeToExpression()
         {
-            throw new NotImplementedException();
+            Expression = null;
+
+            if (_expressionTree.Nodes.Count < 1 || _expressionTree.Nodes[0].Nodes.Count < 1)
+            {
+                return;
+            }
+
+            var root = _expressionTree.Nodes[0].Nodes[0];
+
+            if (root == null)
+            {
+                return;
+            }
+
+            Expression = root.Tag as BoolExpandableExpression;
+            BuildExpression(root, Expression);
+        }
+
+        private static void BuildExpression(TreeNode root, BoolExpandableExpression expression)
+        {
+            expression.Args.Clear();
+
+            for (int i = 0; i < root.Nodes.Count; i++)
+            {
+                var child = root.Nodes[i].Tag as BoolExpandableExpression;
+                expression.Args.Add(i, child);
+                BuildExpression(root.Nodes[i], child);
+            }
         }
 
         private void EditSimpleArgs(BoolExpandableExpression expression)
