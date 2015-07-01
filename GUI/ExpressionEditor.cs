@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Schema;
+using DataLayer.Schema.Variable;
 using DataLayer.Top;
 
 namespace GUI
@@ -43,11 +44,10 @@ namespace GUI
 
                 if (typeChooser.ShowDialog(this) == DialogResult.OK)
                 {
-                    BuildTree(_expressionTree.SelectedNode, typeChooser.NewExpression);
+                    var expression = typeChooser.NewExpression;
+                    BuildTree(_expressionTree.SelectedNode, expression);
 
-                    EditSimpleArgs(typeChooser.NewExpression);
-
-                    _expressionTree.SelectedNode.ExpandAll();
+                    EditExpression(expression);
                 }
             });
 
@@ -97,10 +97,22 @@ namespace GUI
             return contextMenu;
         }
 
-        private void EditSimpleArgs(BoolExpandableExpression newExpression)
+        private void EditExpression(BoolExpandableExpression expression)
         {
-//            var simpleArgEditor = null;
-            switch (newExpression.Name)
+            EditSimpleArgs(expression);
+
+            TreeToExpression();
+        }
+
+        private void TreeToExpression()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void EditSimpleArgs(BoolExpandableExpression expression)
+        {
+            var simpleArgEditor = new SimpleArgEditor(expression);
+            switch (expression.Name)
             {
                 case "ExpressionTrue":
                 case "ExpressionFalse":
@@ -109,6 +121,22 @@ namespace GUI
                 case "ExpressionNot":
                     return;
                 case "ExpressionVariableExists":
+                    simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager()
+                    {
+                        Index = 1,
+                        Label = "Variable name: ",
+                        GetValue = (expr) =>
+                        {
+                            var typedExpression =  expr as ExpressionVariableExists;
+                            return typedExpression.VariableName;
+                        },
+                        SetValue = (expr, val) =>
+                        {
+                            var typedExpression = expr as ExpressionVariableExists;
+                            typedExpression.VariableName = val;
+                        }
+                    });
+                    break;
                 case "ExpressionIntCheck":
                 case "ExpressionStringCheck":
                 case "ExpressionFloatCheck":
@@ -116,8 +144,15 @@ namespace GUI
                 case "ExpressionIntModify":
                 case "ExpressionFloatModify":
                 default:
-                    throw new EventLogException();
+                    break;
             }
+
+            simpleArgEditor.ShowDialog(this);
+
+//            if (simpleArgEditor.ShowDialog(this) == DialogResult.OK)
+//            {
+//                expression.SimpleArgs = simpleArgEditor.Expression.SimpleArgs;
+//            }
         }
 
         private void ExpressionToTree(BoolExpandableExpression expression)
@@ -231,6 +266,21 @@ namespace GUI
             if (e.Button == MouseButtons.Right && _expressionTree.SelectedNode != null)
             {
                 _nodeMenu.Show(this, e.Location);
+            }
+        }
+
+        private void _expressionTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void _expressionTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            _expressionTree.SelectedNode = _expressionTree.GetNodeAt(e.X, e.Y);
+
+            if (_expressionTree.SelectedNode.Level > 0)
+            {
+                EditExpression(_expressionTree.SelectedNode.Tag as BoolExpandableExpression);
             }
         }
     }

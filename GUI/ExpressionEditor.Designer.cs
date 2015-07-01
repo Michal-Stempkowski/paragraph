@@ -55,7 +55,9 @@
             this._expressionTree.TabIndex = 0;
             this._expressionTree.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this._expressionTree_BeforeCollapse);
             this._expressionTree.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this._expressionTree_ItemDrag);
+            this._expressionTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this._expressionTree_AfterSelect);
             this._expressionTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this._expressionTree_NodeMouseClick);
+            this._expressionTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this._expressionTree_NodeMouseDoubleClick);
             this._expressionTree.DragDrop += new System.Windows.Forms.DragEventHandler(this._expressionTree_DragDrop);
             this._expressionTree.DragEnter += new System.Windows.Forms.DragEventHandler(this._expressionTree_DragEnter);
             this._expressionTree.DragOver += new System.Windows.Forms.DragEventHandler(this._expressionTree_DragOver);
