@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Schema;
 using DataLayer.Schema.Variable;
+using DataLayer.Schema.Variable.Mutable;
 using DataLayer.Top;
 
 namespace GUI
@@ -165,10 +166,42 @@ namespace GUI
                         }
                     });
                     break;
+                case "ExpressionAssign":
+                    simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager()
+                    {
+                        Index = 1,
+                        Label = "Variable name: ",
+                        GetValue = (expr) =>
+                        {
+                            var typedExpression =  expr as ExpressionAssign;
+                            return typedExpression.VariableName;
+                        },
+                        SetValue = (expr, val) =>
+                        {
+                            var typedExpression = expr as ExpressionAssign;
+                            typedExpression.VariableName = val;
+                        }
+                    });
+
+                    simpleArgEditor.SimpleArgManagers.Add(new SimpleStringArgManager()
+                    {
+                        Index = 2,
+                        Label = "Variable value: ",
+                        GetValue = (expr) =>
+                        {
+                            var typedExpression = expr as ExpressionAssign;
+                            return typedExpression.Value;
+                        },
+                        SetValue = (expr, val) =>
+                        {
+                            var typedExpression = expr as ExpressionAssign;
+                            typedExpression.Value = val;
+                        }
+                    });
+                    break;
                 case "ExpressionIntCheck":
                 case "ExpressionStringCheck":
                 case "ExpressionFloatCheck":
-                case "ExpressionAssign":
                 case "ExpressionIntModify":
                 case "ExpressionFloatModify":
                 default:

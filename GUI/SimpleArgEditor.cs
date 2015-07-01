@@ -31,6 +31,8 @@ namespace GUI
 
         private void SimpleArgEditor_Shown(object sender, EventArgs e)
         {
+            TableLayoutPanel.RowCount = SimpleArgManagers.Count + 1;
+
             foreach (var manager in SimpleArgManagers)
             {
                 manager.Create(this);
@@ -64,7 +66,8 @@ namespace GUI
             {
                 Text = Label,
                 Dock = DockStyle.Top,
-                TextAlign = ContentAlignment.MiddleRight
+                TextAlign = ContentAlignment.MiddleRight,
+                AutoSize = true
             }, 0, Index);
         }
 
@@ -83,7 +86,8 @@ namespace GUI
             _textBox = new TextBox
             {
                 Text = GetValue(editor.Expression),
-                Dock = DockStyle.Top
+                Dock = DockStyle.Top,
+                AutoSize = true
             };
 
             editor.TableLayoutPanel.Controls.Add(_textBox, 1, Index);
