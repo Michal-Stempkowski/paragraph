@@ -98,6 +98,15 @@ namespace GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prompt.
+        /// </summary>
+        internal static string GuiHelper_ShowPromptWindow_Prompt {
+            get {
+                return ResourceManager.GetString("GuiHelper_ShowPromptWindow_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Main_EditorButton_Click_Error {

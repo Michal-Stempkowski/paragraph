@@ -136,4 +136,7 @@
   <data name="Main_EditorButton_Click_Error" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="GuiHelper_ShowPromptWindow_Prompt" xml:space="preserve">
+    <value>Prompt</value>
+  </data>
 </root>

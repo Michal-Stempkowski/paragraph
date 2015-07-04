@@ -10,6 +10,10 @@ namespace GUI
             return MessageBox.Show(Resources.ExitApplicationPrompt, Resources.ExitApplicationTitle,
                 MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
+        public static DialogResult ShowPromptWindow(string prompt)
+        {
+            return MessageBox.Show(prompt, Resources.GuiHelper_ShowPromptWindow_Prompt, MessageBoxButtons.YesNoCancel);
+        }
 
         public static string ShowLoadGameFileChooser()
         {

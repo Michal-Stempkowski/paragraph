@@ -61,30 +61,55 @@ namespace GUI
         private void HandleDecisionButtonClick(object sender, EventArgs args)
         {
             var self = sender as Button;
-            switch (ModifierKeys)
-            {
-                case Keys.Control:
-                    throw new NotImplementedException();
-                case Keys.Alt:
-                    throw new NotImplementedException();
-            }
 
             var decision = self.Tag as DecisionSchema;
 
             var index = _entityEditorMenu.CurrentSchema.Decisions.IndexOf(decision);
 
-            var decisionEditor = new DecisionEditor(_entityEditorMenu, decision);
+            switch (ModifierKeys)
+            {
+                case Keys.Control:
+                    throw new NotImplementedException();
+                case Keys.Alt:
+                    _entityEditorMenu.CurrentSchema.Decisions.RemoveAt(index);
+                    break;
+                default:
+                    var decisionEditor = new DecisionEditor(_entityEditorMenu, decision);
 
-            decisionEditor.ShowDialog(this);
-
-            _entityEditorMenu.CurrentSchema.Decisions.RemoveAt(index);
-            _entityEditorMenu.CurrentSchema.Decisions.Insert(index, decisionEditor.Decision);
+                    decisionEditor.ShowDialog(this);
+                    _entityEditorMenu.SaveCurrentSchema();
+                    _entityEditorMenu.CurrentSchema.Decisions.RemoveAt(index);
+                    _entityEditorMenu.CurrentSchema.Decisions.Insert(index, decisionEditor.Decision);
+                    break;
+            }
 
             ReloadGui();
         }
 
+        private bool ConfirmRoomDisposal()
+        {
+            switch (GuiHelper.ShowPromptWindow("Do you want to save room?"))
+            {
+                case DialogResult.Yes:
+                    _entityEditorMenu.SaveCurrentSchema();
+                    return true;
+                case DialogResult.No:
+                    return true;
+                case DialogResult.Cancel:
+                    return false;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
         private void EntityEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (!ConfirmRoomDisposal())
+            {
+                e.Cancel = true;
+                return;
+            }
+
             _main.Show();
         }
 

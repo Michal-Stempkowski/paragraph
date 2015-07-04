@@ -42,7 +42,17 @@ namespace DataLayer.Room
 
         public RoomSchema LoadRoomSchema(string destination)
         {
-            return _objectProvider.ReadRoom(destination);
+            return _objectProvider.ReadRoom(destination) ?? new RoomSchema()
+            {
+                Decisions = new List<DecisionSchema>(),
+                Description = "___Invalid_room_file__",
+                Name = "Invalid room"
+            };
+        }
+
+        public void SaveRoomSchema(string destination, RoomSchema roomSchema)
+        {
+            _objectProvider.WriteRoom(destination, roomSchema);
         }
     }
 }

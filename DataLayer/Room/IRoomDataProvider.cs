@@ -8,5 +8,6 @@ namespace DataLayer.Room
         IEntity LoadRoom(string roomPath, IStateManager stateManager);
         void CreateIfNeeded(string destination);
         RoomSchema LoadRoomSchema(string destination);
+        void SaveRoomSchema(string destination, RoomSchema roomSchema);
     }
 }

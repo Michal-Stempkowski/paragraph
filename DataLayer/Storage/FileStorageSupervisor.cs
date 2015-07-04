@@ -15,6 +15,7 @@ namespace DataLayer.Storage
         {
             using (var file = new StreamWriter(path, append: false))
             {
+                file.AutoFlush = true;
                 file.Write(serializedRoom);
             }
         }

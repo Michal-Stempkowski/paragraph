@@ -46,5 +46,10 @@ namespace DataLayer.Logic
         {
             return _roomDataProvider.LoadRoomSchema(destination);
         }
+
+        public void SaveRawSchema(string destination, RoomSchema roomSchema)
+        {
+            _roomDataProvider.SaveRoomSchema(destination, roomSchema);
+        }
     }
 }

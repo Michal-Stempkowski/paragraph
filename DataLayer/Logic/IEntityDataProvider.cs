@@ -8,5 +8,6 @@ namespace DataLayer.Logic
         IEntity CurrentEntity { get; }
         void CreateRoomIfIdDoesNotExist(string destination);
         RoomSchema LoadRawSchema(string destination);
+        void SaveRawSchema(string destination, RoomSchema roomSchema);
     }
 }

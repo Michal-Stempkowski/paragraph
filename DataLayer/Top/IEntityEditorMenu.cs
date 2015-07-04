@@ -7,5 +7,6 @@ namespace DataLayer.Top
         RoomSchema CurrentSchema { get; }
         IExpressionEditorMenu ExpressionEditorMenu { get; }
         void LoadSchema(string destination);
+        void SaveCurrentSchema();
     }
 }

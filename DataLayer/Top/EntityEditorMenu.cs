@@ -13,6 +13,7 @@ namespace DataLayer.Top
     {
         private readonly IEntityDataProvider _provider;
         private readonly IStateManager _stateManager;
+        private string _destination;
 
         public EntityEditorMenu(IEntityDataProvider provider, IStateManager stateManager, ICoreTranslator coreTranslator)
         {
@@ -28,7 +29,13 @@ namespace DataLayer.Top
         public void LoadSchema(string destination)
         {
 //            _provider.PerformEntityTransition(destination, _stateManager);
+            _destination = destination;
             CurrentSchema = _provider.LoadRawSchema(destination);
+        }
+
+        public void SaveCurrentSchema()
+        {
+            _provider.SaveRawSchema(_destination, CurrentSchema);
         }
     }
 }
