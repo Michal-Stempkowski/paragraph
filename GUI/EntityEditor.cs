@@ -42,6 +42,16 @@ namespace GUI
             roomSchema.Decisions.ForEach(AddDecisionButton);
         }
 
+        private void LoadFromGui()
+        {
+            toolTipHelper.RemoveAll();
+
+            var roomSchema = _entityEditorMenu.CurrentSchema;
+
+            roomSchema.Name = nameBox.Text;
+            roomSchema.Description = descriptionBox.Text;
+        }
+
         private void AddDecisionButton(DecisionSchema decision)
         {
             var button = new Button
@@ -65,6 +75,8 @@ namespace GUI
             var decision = self.Tag as DecisionSchema;
 
             var index = _entityEditorMenu.CurrentSchema.Decisions.IndexOf(decision);
+
+            LoadFromGui();
 
             switch (ModifierKeys)
             {
@@ -124,6 +136,7 @@ namespace GUI
 
         private void addNewDecisionButton_Click(object sender, EventArgs e)
         {
+            LoadFromGui();
             _entityEditorMenu.CurrentSchema.Decisions.Add(new DecisionSchema
             {
                 Description = "Empty description",

@@ -41,6 +41,7 @@ namespace GUI
 
         private void VisibilityRequirementsButtonOnClick(object sender, EventArgs eventArgs)
         {
+            GuiToDecision();
             Decision.VisibilityRequirements = ShowExpressionEditor(Decision.VisibilityRequirements);
             DecisionToGui();
         }
@@ -56,6 +57,7 @@ namespace GUI
 
         private void _effectButton_Click(object sender, EventArgs e)
         {
+            GuiToDecision();
             Decision.Effect = ShowExpressionEditor(Decision.Effect);
             DecisionToGui();
         }
