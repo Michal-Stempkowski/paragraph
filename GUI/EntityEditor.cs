@@ -69,7 +69,11 @@ namespace GUI
             switch (ModifierKeys)
             {
                 case Keys.Control:
-                    throw new NotImplementedException();
+                    if (ConfirmRoomDisposal())
+                    {
+                        PerformGoto(decision.Destination);
+                    }
+                    break;
                 case Keys.Alt:
                     _entityEditorMenu.CurrentSchema.Decisions.RemoveAt(index);
                     break;
@@ -84,6 +88,11 @@ namespace GUI
             }
 
             ReloadGui();
+        }
+
+        private void PerformGoto(string destination)
+        {
+            _entityEditorMenu.LoadSchema(destination);
         }
 
         private bool ConfirmRoomDisposal()
