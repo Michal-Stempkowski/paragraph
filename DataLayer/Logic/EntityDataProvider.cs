@@ -26,6 +26,7 @@ namespace DataLayer.Logic
             try
             {
                 CurrentEntity = _roomDataProvider.LoadRoom(entityPath, stateManager);
+                stateManager.SetCurrentEntity(entityPath);
                 return true;
             }
             catch (LoadFailedException)

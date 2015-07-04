@@ -46,5 +46,10 @@ namespace DataLayer.Top
         {
             get { return _stateManager; }
         }
+
+        public void SaveGame(string path)
+        {
+            _provider.SaveGame(path, StateManager);
+        }
     }
 }

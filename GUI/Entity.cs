@@ -70,6 +70,20 @@ namespace GUI
 
         private void _onClosing(object sender, FormClosingEventArgs e)
         {
+            switch (GuiHelper.ShowPromptWindow("Do yuo want to save game?"))
+            {
+                case DialogResult.Yes:
+                    var path = GuiHelper.ShowSaveNewGameFileChooser();
+                    _entityMenu.SaveGame(path);
+                    break;
+                case DialogResult.No:
+                    break;
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    return;
+                default:
+                    throw new NotImplementedException();
+            }
             _mainMenuForm.Show();
         }
     }

@@ -10,5 +10,6 @@ namespace DataLayer.Top
         void Decide(IDecision decision);
         void PerformTransition(string path);
         IStateManager StateManager { get; }
+        void SaveGame(string path);
     }
 }

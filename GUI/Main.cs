@@ -65,8 +65,6 @@ namespace GUI
                 return destination;
             }
 
-            MessageBox.Show(destination);
-
             _mainMenu.CreateNewGame(source, destination);
             return destination;
         }

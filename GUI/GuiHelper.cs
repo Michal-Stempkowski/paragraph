@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using DataLayer.Logic;
 using GUI.Properties;
 
 namespace GUI
