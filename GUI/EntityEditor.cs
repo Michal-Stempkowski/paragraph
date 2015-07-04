@@ -71,9 +71,14 @@ namespace GUI
 
             var decision = self.Tag as DecisionSchema;
 
+            var index = _entityEditorMenu.CurrentSchema.Decisions.IndexOf(decision);
+
             var decisionEditor = new DecisionEditor(_entityEditorMenu, decision);
 
             decisionEditor.ShowDialog(this);
+
+            _entityEditorMenu.CurrentSchema.Decisions.RemoveAt(index);
+            _entityEditorMenu.CurrentSchema.Decisions.Insert(index, decisionEditor.Decision);
 
             ReloadGui();
         }
@@ -81,6 +86,19 @@ namespace GUI
         private void EntityEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             _main.Show();
+        }
+
+        private void addNewDecisionButton_Click(object sender, EventArgs e)
+        {
+            _entityEditorMenu.CurrentSchema.Decisions.Add(new DecisionSchema
+            {
+                Description = "Empty description",
+                Destination = @"//INVALID_DESTINATION",
+                Effect = new ExpressionTrue(),
+                VisibilityRequirements = new ExpressionTrue()
+            });
+
+            ReloadGui();
         }
     }
 }

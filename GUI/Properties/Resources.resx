@@ -130,4 +130,10 @@
   <data name="all you need is love" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\all you need is love.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Main_EditorButton_Click_Invalid_path_or_read_error" xml:space="preserve">
+    <value>Invalid path or read error</value>
+  </data>
+  <data name="Main_EditorButton_Click_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>

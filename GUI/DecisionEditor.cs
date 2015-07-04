@@ -15,32 +15,34 @@ namespace GUI
     public partial class DecisionEditor : Form
     {
         private readonly IEntityEditorMenu _entityEditorMenu;
-        private readonly DecisionSchema _decision;
+        public readonly DecisionSchema Decision;
 
         public DecisionEditor(IEntityEditorMenu entityEditorMenu, DecisionSchema decision)
         {
             _entityEditorMenu = entityEditorMenu;
-            _decision = decision;
+            Decision = decision;
             InitializeComponent();
+            _visibilityRequirementsButton.Click += VisibilityRequirementsButtonOnClick;
 
             DecisionToGui();
         }
 
         private void DecisionToGui()
         {
-            _descriptionBox.Text = _decision.Description;
-            _destinationBox.Text = _decision.Destination;
+            _descriptionBox.Text = Decision.Description;
+            _destinationBox.Text = Decision.Destination;
 
 
-            _visibilityRequirementsButton.Tag = _decision.VisibilityRequirements;
-            _visibilityRequirementsButton.Click += VisibilityRequirementsButtonOnClick;
+            _visibilityRequirementsButton.Tag = Decision.VisibilityRequirements;
+//            _visibilityRequirementsButton.Click += VisibilityRequirementsButtonOnClick;
 
-            _effectButton.Tag = _decision.Effect;
+            _effectButton.Tag = Decision.Effect;
         }
 
         private void VisibilityRequirementsButtonOnClick(object sender, EventArgs eventArgs)
         {
-            _decision.VisibilityRequirements = ShowExpressionEditor(_decision.VisibilityRequirements);
+            Decision.VisibilityRequirements = ShowExpressionEditor(Decision.VisibilityRequirements);
+            DecisionToGui();
         }
 
         private BoolExpandableExpression ShowExpressionEditor(BoolExpandableExpression expression)
@@ -54,20 +56,26 @@ namespace GUI
 
         private void _effectButton_Click(object sender, EventArgs e)
         {
-            _decision.Effect = ShowExpressionEditor(_decision.Effect);
+            Decision.Effect = ShowExpressionEditor(Decision.Effect);
+            DecisionToGui();
         }
 
         private void GuiToDecision()
         {
-            _decision.Description = _descriptionBox.Text;
-            _decision.Destination = _destinationBox.Text;
-            _decision.VisibilityRequirements = _visibilityRequirementsButton.Tag as BoolExpandableExpression;
-            _decision.Effect = _effectButton.Tag as BoolExpandableExpression;
+            Decision.Description = _descriptionBox.Text;
+            Decision.Destination = _destinationBox.Text;
+            Decision.VisibilityRequirements = _visibilityRequirementsButton.Tag as BoolExpandableExpression;
+            Decision.Effect = _effectButton.Tag as BoolExpandableExpression;
         }
 
         private void DecisionEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             GuiToDecision();
+        }
+
+        private void DecisionEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //GuiToDecision();
         }
     }
 }

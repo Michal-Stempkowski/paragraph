@@ -1,6 +1,7 @@
 using System;
 using DataLayer.Exceptions;
 using DataLayer.Room;
+using DataLayer.Schema;
 
 namespace DataLayer.Logic
 {
@@ -36,5 +37,14 @@ namespace DataLayer.Logic
         }
 
         public IEntity CurrentEntity { get; private set; }
+        public void CreateRoomIfIdDoesNotExist(string destination)
+        {
+            _roomDataProvider.CreateIfNeeded(destination);
+        }
+
+        public RoomSchema LoadRawSchema(string destination)
+        {
+            return _roomDataProvider.LoadRoomSchema(destination);
+        }
     }
 }

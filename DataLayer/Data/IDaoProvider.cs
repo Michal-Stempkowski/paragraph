@@ -9,5 +9,6 @@ namespace DataLayer.Data
         void WriteRoom(string pathForNewRoomRoom, RoomSchema room);
         void WriteStateManager(string path, IStateManager stateManager);
         IStateManager ReadStateManager(string path);
+        bool DoesExist(string destination);
     }
 }

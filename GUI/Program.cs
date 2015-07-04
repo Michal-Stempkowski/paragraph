@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Core;
+using DataLayer.Data;
 using DataLayer.Logic;
+using DataLayer.Room;
 using DataLayer.Schema;
 using DataLayer.Schema.Variable;
 using DataLayer.Schema.Variable.Mutable;
+using DataLayer.Storage;
 using DataLayer.Top;
 using NSubstitute;
 using MainMenu = DataLayer.Top.MainMenu;
@@ -83,24 +86,33 @@ namespace GUI
                 }
             };
 
-            var mainMenu = Substitute.For<IMainMenu>();
-            var entityMenu = Substitute.For<IEntityMenu>();
-            var entityEditorMenu = Substitute.For<IEntityEditorMenu>();
+//            var mainMenu = Substitute.For<IMainMenu>();\
+            var stateManager = new StateManager();
+            var storageSupervisor = new FileStorageSupervisor(Environment.CurrentDirectory);
+            var objectDataProvider = new JsonDaoProvider<StateManager>(storageSupervisor);
+            var coreTranslator = new CoreTranslator();
+            var roomDataProvider = new RoomDataProvider(objectDataProvider, coreTranslator);
+            var entityDataProvider = new EntityDataProvider(roomDataProvider);
+            var mainMenu = new MainMenu(entityDataProvider, stateManager, coreTranslator);
 
-            ICoreTranslator coreTranslator = new CoreTranslator();
             coreTranslator.InitializeUnit(coreTranslator.GetType().Assembly);
+//            var entityMenu = Substitute.For<IEntityMenu>();
+//            var entityEditorMenu = Substitute.For<IEntityEditorMenu>();
 
-            IExpressionEditorMenu expressionEditorMenu = new ExpressionEditorMenu(coreTranslator);
+//            ICoreTranslator coreTranslator = new CoreTranslator();
+//            coreTranslator.InitializeUnit(coreTranslator.GetType().Assembly);
+//
+//            IExpressionEditorMenu expressionEditorMenu = new ExpressionEditorMenu(coreTranslator);
 
-            mainMenu.StartGame(Arg.Any<string>()).Returns(entityMenu);
-            mainMenu.StartEditor(Arg.Any<string>()).Returns(entityEditorMenu);
-
-            entityMenu.DescritptionBarContent.Returns("Wkroczyłeś do mrocznego pomieszczenia. Przed sobą dostrzegasz potężne dębowe drzwi.");
-            entityMenu.GetAvailableDecisions().Returns(decisionsEntities);
-
-            entityEditorMenu.CurrentSchema.Returns(room);
-
-            entityEditorMenu.ExpressionEditorMenu.Returns(expressionEditorMenu);
+//            mainMenu.StartGame(Arg.Any<string>()).Returns(entityMenu);
+//            mainMenu.StartEditor(Arg.Any<string>()).Returns(entityEditorMenu);
+//
+//            entityMenu.DescritptionBarContent.Returns("Wkroczyłeś do mrocznego pomieszczenia. Przed sobą dostrzegasz potężne dębowe drzwi.");
+//            entityMenu.GetAvailableDecisions().Returns(decisionsEntities);
+//
+//            entityEditorMenu.CurrentSchema.Returns(room);
+//
+//            entityEditorMenu.ExpressionEditorMenu.Returns(expressionEditorMenu);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

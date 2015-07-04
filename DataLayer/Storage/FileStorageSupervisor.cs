@@ -26,5 +26,10 @@ namespace DataLayer.Storage
                 return file.ReadToEnd();
             }
         }
+
+        public bool DoesExist(string destination)
+        {
+            return File.Exists(destination);
+        }
     }
 }

@@ -39,5 +39,10 @@ namespace DataLayer.Data
             string serializedManager = _storageSupervisor.Read(path);
             return JsonConvert.DeserializeObject<TStateManager>(serializedManager);
         }
+
+        public bool DoesExist(string destination)
+        {
+            return _storageSupervisor.DoesExist(destination);
+        }
     }
 }

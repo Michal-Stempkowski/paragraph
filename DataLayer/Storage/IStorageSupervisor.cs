@@ -6,5 +6,6 @@ namespace DataLayer.Storage
     {
         void Write(string path, string serializedRoom);
         string Read(string path);
+        bool DoesExist(string destination);
     }
 }

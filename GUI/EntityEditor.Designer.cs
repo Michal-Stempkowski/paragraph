@@ -173,6 +173,7 @@
             this.addNewDecisionButton.Text = "Add new decision";
             this.toolTipHelper.SetToolTip(this.addNewDecisionButton, "trololo");
             this.addNewDecisionButton.UseVisualStyleBackColor = true;
+            this.addNewDecisionButton.Click += new System.EventHandler(this.addNewDecisionButton_Click);
             // 
             // EntityEditor
             // 

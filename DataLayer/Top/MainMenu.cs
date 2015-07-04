@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer.Core;
 using DataLayer.Logic;
 
 namespace DataLayer.Top
@@ -11,11 +12,13 @@ namespace DataLayer.Top
     {
         private readonly IEntityDataProvider _provider;
         private readonly IStateManager _stateManager;
+        private readonly ICoreTranslator _coreTranslator;
 
-        public MainMenu(IEntityDataProvider provider, IStateManager stateManager)
+        public MainMenu(IEntityDataProvider provider, IStateManager stateManager, ICoreTranslator coreTranslator)
         {
             _provider = provider;
             _stateManager = stateManager;
+            _coreTranslator = coreTranslator;
         }
 
         public void CreateNewGame(string source, string destination)
@@ -33,12 +36,22 @@ namespace DataLayer.Top
 
         public bool InitEditor(string destination)
         {
-            return true;
+            try
+            {
+                _provider.CreateRoomIfIdDoesNotExist(destination);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            return false;
         }
 
         public IEntityEditorMenu StartEditor(string destination)
         {
-            var entityEditorMenu = new EntityEditorMenu(_provider, _stateManager);
+            var entityEditorMenu = new EntityEditorMenu(_provider, _stateManager, _coreTranslator);
             entityEditorMenu.LoadSchema(destination);
 
             return entityEditorMenu;

@@ -35,5 +35,10 @@ namespace GUI
 
             return file.ShowDialog() == DialogResult.OK ? file.FileName : "";
         }
+
+        public static DialogResult ShowErrorDialog(IWin32Window owner, string text)
+        {
+            return MessageBox.Show(owner, text, Resources.Main_EditorButton_Click_Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

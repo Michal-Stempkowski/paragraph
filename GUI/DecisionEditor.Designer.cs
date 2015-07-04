@@ -160,6 +160,7 @@
             this.Name = "DecisionEditor";
             this.Text = "DecisionEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DecisionEditor_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DecisionEditor_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

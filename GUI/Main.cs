@@ -86,8 +86,9 @@ namespace GUI
             var destination = GuiHelper.ShowEditorFileChooser();
 
             if (String.IsNullOrWhiteSpace(destination) ||
-                _mainMenu.InitEditor(destination))
+                !_mainMenu.InitEditor(destination))
             {
+                GuiHelper.ShowErrorDialog(this, Resources.Main_EditorButton_Click_Invalid_path_or_read_error);
                 return;
             }
 

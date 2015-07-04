@@ -96,5 +96,23 @@ namespace GUI.Properties {
                 return ResourceManager.GetString("GuiHelper_ShowEditorFileChooser_Select_existing_or_create_new_file", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Main_EditorButton_Click_Error {
+            get {
+                return ResourceManager.GetString("Main_EditorButton_Click_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid path or read error.
+        /// </summary>
+        internal static string Main_EditorButton_Click_Invalid_path_or_read_error {
+            get {
+                return ResourceManager.GetString("Main_EditorButton_Click_Invalid_path_or_read_error", resourceCulture);
+            }
+        }
     }
 }
