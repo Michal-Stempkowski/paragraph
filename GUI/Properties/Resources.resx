@@ -139,4 +139,10 @@
   <data name="GuiHelper_ShowPromptWindow_Prompt" xml:space="preserve">
     <value>Prompt</value>
   </data>
+  <data name="GuiHelper_room_files" xml:space="preserve">
+    <value>Room files (*.room)|*.room</value>
+  </data>
+  <data name="GuiHelper_save_files" xml:space="preserve">
+    <value>Save files (*.state)|*.state</value>
+  </data>
 </root>

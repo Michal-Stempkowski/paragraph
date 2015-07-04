@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DataLayer.Core;
 using DataLayer.Data;
 using DataLayer.Logic;
@@ -21,8 +22,19 @@ namespace DataLayer.Room
         public IEntity LoadRoom(string roomPath, IStateManager stateManager)
         {
             var roomSchema = _objectProvider.ReadRoom(roomPath);
+            var entity = new Entity
+            {
+                Description = roomSchema.Description,
+                Decisions = roomSchema.Decisions.Select(x => new Decision
+                {
+                    Description = x.Description,
+                    Destination = x.Destination,
+                    Effect = (manager) => _translator.ExpandToBool(x.Effect, manager),
+                    IsVisible = _translator.ExpandToBool(x.Effect, stateManager)
+                } as IDecision).ToList(),
+            };
 
-            throw new NotImplementedException();
+            return entity;
         }
 
         public void CreateIfNeeded(string destination)
@@ -53,6 +65,16 @@ namespace DataLayer.Room
         public void SaveRoomSchema(string destination, RoomSchema roomSchema)
         {
             _objectProvider.WriteRoom(destination, roomSchema);
+        }
+
+        public IStateManager LoadStateManager(string destination)
+        {
+            return _objectProvider.ReadStateManager(destination);
+        }
+
+        public void SaveStateManager(string destination, IStateManager stateManager)
+        {
+            _objectProvider.WriteStateManager(destination, stateManager);
         }
     }
 }

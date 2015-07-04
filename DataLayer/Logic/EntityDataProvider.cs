@@ -51,5 +51,15 @@ namespace DataLayer.Logic
         {
             _roomDataProvider.SaveRoomSchema(destination, roomSchema);
         }
+
+        public IStateManager LoadGame(string destination)
+        {
+            return _roomDataProvider.LoadStateManager(destination);
+        }
+
+        public void SaveGame(string destination, IStateManager stateManager)
+        {
+            _roomDataProvider.SaveStateManager(destination, stateManager);
+        }
     }
 }

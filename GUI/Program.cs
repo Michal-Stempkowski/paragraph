@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataLayer.Core;
@@ -87,13 +89,13 @@ namespace GUI
             };
 
 //            var mainMenu = Substitute.For<IMainMenu>();\
-            var stateManager = new StateManager();
-            var storageSupervisor = new FileStorageSupervisor(Environment.CurrentDirectory);
+//            MessageBox.Show(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.Parent.Parent.FullName);
+            var storageSupervisor = new FileStorageSupervisor(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.Parent.Parent.FullName);
             var objectDataProvider = new JsonDaoProvider<StateManager>(storageSupervisor);
             var coreTranslator = new CoreTranslator();
             var roomDataProvider = new RoomDataProvider(objectDataProvider, coreTranslator);
             var entityDataProvider = new EntityDataProvider(roomDataProvider);
-            var mainMenu = new MainMenu(entityDataProvider, stateManager, coreTranslator);
+            var mainMenu = new MainMenu(entityDataProvider, coreTranslator);
 
             coreTranslator.InitializeUnit(coreTranslator.GetType().Assembly);
 //            var entityMenu = Substitute.For<IEntityMenu>();

@@ -89,6 +89,24 @@ namespace GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Room files (*.room)|*.room.
+        /// </summary>
+        internal static string GuiHelper_room_files {
+            get {
+                return ResourceManager.GetString("GuiHelper_room_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save files (*.state)|*.state.
+        /// </summary>
+        internal static string GuiHelper_save_files {
+            get {
+                return ResourceManager.GetString("GuiHelper_save_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select existing or create new file.
         /// </summary>
         internal static string GuiHelper_ShowEditorFileChooser_Select_existing_or_create_new_file {

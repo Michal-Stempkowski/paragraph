@@ -44,7 +44,7 @@ namespace DataLayer.Top
 
         public IStateManager StateManager
         {
-            get { throw new System.NotImplementedException(); }
+            get { return _stateManager; }
         }
     }
 }

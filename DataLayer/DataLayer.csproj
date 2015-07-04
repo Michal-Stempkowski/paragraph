@@ -54,6 +54,7 @@
     <Compile Include="Data\JsonDaoProvider.cs" />
     <Compile Include="Core\ICoreTranslator.cs" />
     <Compile Include="Exceptions\FileDoesNotExistException.cs" />
+    <Compile Include="Logic\Entity.cs" />
     <Compile Include="Logic\StateManager.cs" />
     <Compile Include="Schema\BoolExpandableExpression.cs" />
     <Compile Include="Schema\BoolTranslatableAttribute.cs" />

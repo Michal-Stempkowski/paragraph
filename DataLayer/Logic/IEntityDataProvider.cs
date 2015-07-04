@@ -9,5 +9,7 @@ namespace DataLayer.Logic
         void CreateRoomIfIdDoesNotExist(string destination);
         RoomSchema LoadRawSchema(string destination);
         void SaveRawSchema(string destination, RoomSchema roomSchema);
+        IStateManager LoadGame(string destination);
+        void SaveGame(string destination, IStateManager stateManager);
     }
 }

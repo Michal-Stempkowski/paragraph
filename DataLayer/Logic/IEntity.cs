@@ -5,6 +5,6 @@ namespace DataLayer.Logic
     public interface IEntity
     {
         string Description { get; }
-        IList<IDecision> Decisions { get; }
+        List<IDecision> Decisions { get; }
     }
 }

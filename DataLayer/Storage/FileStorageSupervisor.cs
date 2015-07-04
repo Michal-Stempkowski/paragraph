@@ -13,6 +13,7 @@ namespace DataLayer.Storage
 
         public void Write(string path, string serializedRoom)
         {
+            path = AddRootIfApplies(path);
             using (var file = new StreamWriter(path, append: false))
             {
                 file.AutoFlush = true;
@@ -22,10 +23,16 @@ namespace DataLayer.Storage
 
         public string Read(string path)
         {
+            path = AddRootIfApplies(path);
             using (var file = new StreamReader(path))
             {
                 return file.ReadToEnd();
             }
+        }
+
+        private string AddRootIfApplies(string path)
+        {
+            return path.Contains(":") ? path : RootPath + Path.DirectorySeparatorChar + path;
         }
 
         public bool DoesExist(string destination)

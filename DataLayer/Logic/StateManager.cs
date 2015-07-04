@@ -9,6 +9,7 @@ namespace DataLayer.Logic
     {
         public const string MagicString = "__";
         public const string FloatEpsilonValueId = MagicString + "FloatEpsilonValue";
+        public const string CurrentEntity = MagicString + "CurrentEntity";
         public const float DefaultFloatEpsilonValue = 0.01f;
 
         public StateManager()
@@ -36,6 +37,16 @@ namespace DataLayer.Logic
             return StateDictionary.TryGetValue(FloatEpsilonValueId, out result) ? 
                 float.Parse(result, CultureInfo.InvariantCulture.NumberFormat) : 
                 DefaultFloatEpsilonValue;
+        }
+
+        public string GetCurrentEntity()
+        {
+            return StateDictionary[CurrentEntity];
+        }
+
+        public string SetCurrentEntity(string path)
+        {
+            return StateDictionary[CurrentEntity] = path;
         }
 
         public void SetString(string variableName, string value)

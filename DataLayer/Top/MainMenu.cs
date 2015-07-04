@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer.Core;
@@ -11,25 +12,26 @@ namespace DataLayer.Top
     public class MainMenu : IMainMenu
     {
         private readonly IEntityDataProvider _provider;
-        private readonly IStateManager _stateManager;
         private readonly ICoreTranslator _coreTranslator;
 
-        public MainMenu(IEntityDataProvider provider, IStateManager stateManager, ICoreTranslator coreTranslator)
+        public MainMenu(IEntityDataProvider provider, ICoreTranslator coreTranslator)
         {
             _provider = provider;
-            _stateManager = stateManager;
             _coreTranslator = coreTranslator;
         }
 
         public void CreateNewGame(string source, string destination)
         {
-//            throw new NotImplementedException();
+            IStateManager stateManager = new StateManager();
+            stateManager.SetCurrentEntity(source);
+            _provider.SaveGame(destination, stateManager);
         }
 
         public IEntityMenu StartGame(string destination)
         {
-            var entityMenu = new EntityMenu(_provider, _stateManager);
-            entityMenu.PerformTransition(destination);
+            IStateManager stateManager = _provider.LoadGame(destination);
+            var entityMenu = new EntityMenu(_provider, stateManager);
+            entityMenu.PerformTransition(stateManager.GetCurrentEntity());
 
             return entityMenu;
         }
@@ -51,7 +53,7 @@ namespace DataLayer.Top
 
         public IEntityEditorMenu StartEditor(string destination)
         {
-            var entityEditorMenu = new EntityEditorMenu(_provider, _stateManager, _coreTranslator);
+            var entityEditorMenu = new EntityEditorMenu(_provider, _coreTranslator);
             entityEditorMenu.LoadSchema(destination);
 
             return entityEditorMenu;

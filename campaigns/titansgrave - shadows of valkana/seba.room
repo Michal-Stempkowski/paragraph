@@ -1,0 +1,1 @@
+{"Name":"Good room","Description":"trololo","Decisions":[{"Description":"dgngn","Destination":"cdn gn","VisibilityRequirements":{"Name":"ExpressionOr","Args":{},"SimpleArgs":{}},"Effect":{"Name":"ExpressionAnd","Args":{},"SimpleArgs":{}}}]}

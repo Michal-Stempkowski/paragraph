@@ -12,13 +12,11 @@ namespace DataLayer.Top
     public class EntityEditorMenu : IEntityEditorMenu
     {
         private readonly IEntityDataProvider _provider;
-        private readonly IStateManager _stateManager;
         private string _destination;
 
-        public EntityEditorMenu(IEntityDataProvider provider, IStateManager stateManager, ICoreTranslator coreTranslator)
+        public EntityEditorMenu(IEntityDataProvider provider, ICoreTranslator coreTranslator)
         {
             _provider = provider;
-            _stateManager = stateManager;
             ExpressionEditorMenu = new ExpressionEditorMenu(coreTranslator);
         }
 

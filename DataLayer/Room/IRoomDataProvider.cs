@@ -9,5 +9,7 @@ namespace DataLayer.Room
         void CreateIfNeeded(string destination);
         RoomSchema LoadRoomSchema(string destination);
         void SaveRoomSchema(string destination, RoomSchema roomSchema);
+        IStateManager LoadStateManager(string destination);
+        void SaveStateManager(string destination, IStateManager stateManager);
     }
 }

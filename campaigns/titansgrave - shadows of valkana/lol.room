@@ -1,0 +1,1 @@
+{"Name":"EnterName","Description":"Enter room description","Decisions":[{"Description":"Empty description","Destination":"campaigns\\titansgrave - shadows of valkana\\seba.room","VisibilityRequirements":{"Name":"ExpressionTrue","Args":{},"SimpleArgs":{}},"Effect":{"Name":"ExpressionTrue","Args":{},"SimpleArgs":{}}}]}

@@ -51,7 +51,7 @@ namespace GUI
 
         private string CreateNewGame()
         {
-            var source = GuiHelper.ShowLoadGameFileChooser();
+            var source = GuiHelper.ShowLoadScenarioFileChooser();
 
             if (String.IsNullOrWhiteSpace(source))
             {
