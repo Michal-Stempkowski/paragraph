@@ -24,7 +24,7 @@ namespace DataLayer.Schema.Variable
 
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            var typedExpr = expr as ExpressionVariableExists;
+            var typedExpr = expr.Convert44<ExpressionVariableExists>();
             return stateManager.HasVariable(typedExpr.VariableName);
             //return stateManager.HasVariable(expr.SimpleArgs[0]);
         }

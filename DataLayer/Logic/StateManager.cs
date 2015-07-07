@@ -51,7 +51,7 @@ namespace DataLayer.Logic
 
         public void SetString(string variableName, string value)
         {
-            StateDictionary.Add(variableName, value);
+            StateDictionary[variableName] = value;
         }
     }
 }

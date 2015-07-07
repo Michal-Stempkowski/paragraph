@@ -43,7 +43,7 @@ namespace DataLayer.Schema.Variable.Mutable
 
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            var typedExpr = (ExpressionAssign) expr;
+            var typedExpr = expr.Convert44<ExpressionAssign>();
 
             stateManager.SetString(typedExpr.VariableName, typedExpr.Value);
 

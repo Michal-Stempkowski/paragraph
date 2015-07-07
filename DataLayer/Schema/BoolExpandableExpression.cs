@@ -52,6 +52,19 @@ namespace DataLayer.Schema
             };
         }
 
+        public T Convert44<T>()
+            where T : BoolExpandableExpression, new()
+        {
+            return new T()
+            {
+                Args = Args.ToDictionary(
+                    x => x.Key,
+                    x => x.Value), // TODO: DO NOT! Add backward translation switch'o'case, use it in validation step (shallow)
+                Name = Name,
+                SimpleArgs = SimpleArgs
+            };
+        }
+
         public override string ToString()
         {
             return 
@@ -64,6 +77,19 @@ namespace DataLayer.Schema
                     .Select(x => x.Value)) +
                 ")";
         }
+
+//        public T CreateInstance<T>()
+//            where T : BoolExpandableExpression, new()
+//        {
+//            var result = new T
+//            {
+//                SimpleArgs = new Dictionary<int, string>(SimpleArgs),
+//                Args = new Dictionary<int, BoolExpandableExpression>(Args)
+//            };
+//
+//
+//            return result;
+//        }
     }
 
     public class BoolExpandableExpressionImpl<T> : BoolExpandableExpression where T : BoolExpandableExpression, new()

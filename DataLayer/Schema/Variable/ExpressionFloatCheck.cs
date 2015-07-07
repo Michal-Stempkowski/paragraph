@@ -59,7 +59,7 @@ namespace DataLayer.Schema.Variable
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
             var epsilon = stateManager.GetFloatEpsilonValue();
-            var typedExpr = (ExpressionFloatCheck)expr;
+            var typedExpr = expr.Convert44<ExpressionFloatCheck>();
 
             var variable = float.Parse(
                 stateManager.GetString(typedExpr.VariableName), 

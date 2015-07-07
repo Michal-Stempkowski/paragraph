@@ -192,12 +192,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntCheck;
+                    var typedExpression = expr.Convert44<ExpressionIntCheck>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntCheck;
+                    var typedExpression = expr.Convert44<ExpressionIntCheck>();
                     typedExpression.VariableName = val;
                 }
             });
@@ -209,12 +209,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof (CheckOperType)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntCheck;
+                    var typedExpression = expr.Convert44 < ExpressionIntCheck>();
                     return typedExpression.OperType.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntCheck;
+                    var typedExpression = expr.Convert44 < ExpressionIntCheck>();
                     typedExpression.OperType = (CheckOperType) Enum.Parse(typeof (CheckOperType), val.ToString());
                 }
             });
@@ -225,12 +225,12 @@ namespace GUI
                 Label = "Variable value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntCheck;
+                    var typedExpression = expr.Convert44 < ExpressionIntCheck>();
                     return typedExpression.Value.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntCheck;
+                    var typedExpression = expr.Convert44 < ExpressionIntCheck>();
                     typedExpression.Value = int.Parse(val);
                 }
             });
@@ -244,12 +244,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     typedExpression.VariableName = val;
                 }
             });
@@ -261,12 +261,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     return typedExpression.Left.ParamSource.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     typedExpression.Left = new ExprParam
                     {
                         ParamSource = (ExprParam.Source) Enum.Parse(typeof (ExprParam.Source), val.ToString()),
@@ -281,12 +281,12 @@ namespace GUI
                 Label = "Left value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     return typedExpression.Left.Value;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     typedExpression.Left = new ExprParam
                     {
                         ParamSource = typedExpression.Left.ParamSource,
@@ -302,12 +302,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     return typedExpression.Right.ParamSource.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     typedExpression.Right = new ExprParam
                     {
                         ParamSource = (ExprParam.Source)Enum.Parse(typeof(ExprParam.Source), val.ToString()),
@@ -322,12 +322,12 @@ namespace GUI
                 Label = "Right value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     return typedExpression.Right.Value;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     typedExpression.Right = new ExprParam
                     {
                         ParamSource = typedExpression.Right.ParamSource,
@@ -343,12 +343,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(ModifyOperType)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     return typedExpression.OperType.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionIntModify;
+                    var typedExpression = expr.Convert44 < ExpressionIntModify>();
                     typedExpression.OperType = (ModifyOperType)Enum.Parse(typeof(ModifyOperType), val.ToString());
                 }
             });
@@ -362,12 +362,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     typedExpression.VariableName = val;
                 }
             });
@@ -379,12 +379,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     return typedExpression.Left.ParamSource.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     typedExpression.Left = new ExprParam
                     {
                         ParamSource = (ExprParam.Source)Enum.Parse(typeof(ExprParam.Source), val.ToString()),
@@ -399,12 +399,12 @@ namespace GUI
                 Label = "Left value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     return typedExpression.Left.Value;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     typedExpression.Left = new ExprParam
                     {
                         ParamSource = typedExpression.Left.ParamSource,
@@ -420,12 +420,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(ExprParam.Source)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     return typedExpression.Right.ParamSource.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     typedExpression.Right = new ExprParam
                     {
                         ParamSource = (ExprParam.Source)Enum.Parse(typeof(ExprParam.Source), val.ToString()),
@@ -440,12 +440,12 @@ namespace GUI
                 Label = "Right value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     return typedExpression.Right.Value;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     typedExpression.Right = new ExprParam
                     {
                         ParamSource = typedExpression.Right.ParamSource,
@@ -461,12 +461,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(ModifyOperType)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     return typedExpression.OperType.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatModify;
+                    var typedExpression = expr.Convert44 < ExpressionFloatModify>();
                     typedExpression.OperType = (ModifyOperType)Enum.Parse(typeof(ModifyOperType), val.ToString());
                 }
             });
@@ -480,12 +480,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatCheck;
+                    var typedExpression = expr.Convert44 < ExpressionFloatCheck>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatCheck;
+                    var typedExpression = expr.Convert44 < ExpressionFloatCheck>();
                     typedExpression.VariableName = val;
                 }
             });
@@ -497,12 +497,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(CheckOperType)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatCheck;
+                    var typedExpression = expr.Convert44 < ExpressionFloatCheck>();
                     return typedExpression.OperType.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatCheck;
+                    var typedExpression = expr.Convert44 < ExpressionFloatCheck>();
                     typedExpression.OperType = (CheckOperType)Enum.Parse(typeof(CheckOperType), val.ToString());
                 }
             });
@@ -513,12 +513,12 @@ namespace GUI
                 Label = "Variable value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionFloatCheck;
+                    var typedExpression = expr.Convert44 < ExpressionFloatCheck>();
                     return typedExpression.Value.ToString(CultureInfo.InvariantCulture);
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionFloatCheck;
+                    var typedExpression = expr.Convert44 < ExpressionFloatCheck>();
                     typedExpression.Value = float.Parse(val);
                 }
             });
@@ -532,12 +532,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionStringCheck;
+                    var typedExpression = expr.Convert44 < ExpressionStringCheck>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionStringCheck;
+                    var typedExpression = expr.Convert44 < ExpressionStringCheck>();
                     typedExpression.VariableName = val;
                 }
             });
@@ -549,12 +549,12 @@ namespace GUI
                 GetInstances = () => { return Enum.GetNames(typeof(CheckOperType)); },
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionStringCheck;
+                    var typedExpression = expr.Convert44 < ExpressionStringCheck>();
                     return typedExpression.OperType.ToString();
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionStringCheck;
+                    var typedExpression = expr.Convert44 < ExpressionStringCheck>();
                     typedExpression.OperType = (CheckOperType)Enum.Parse(typeof(CheckOperType), val.ToString());
                 }
             });
@@ -565,12 +565,12 @@ namespace GUI
                 Label = "Variable value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionStringCheck;
+                    var typedExpression = expr.Convert44 < ExpressionStringCheck>();
                     return typedExpression.Value;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionStringCheck;
+                    var typedExpression = expr.Convert44 < ExpressionStringCheck>();
                     typedExpression.Value = val;
                 }
             });
@@ -584,12 +584,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionAssign;
+                    var typedExpression = expr.Convert44 < ExpressionAssign>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionAssign;
+                    var typedExpression = expr.Convert44 < ExpressionAssign>();
                     typedExpression.VariableName = val;
                 }
             });
@@ -600,12 +600,12 @@ namespace GUI
                 Label = "Variable value: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionAssign;
+                    var typedExpression = expr.Convert44 < ExpressionAssign>();
                     return typedExpression.Value;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionAssign;
+                    var typedExpression = expr.Convert44 < ExpressionAssign>();
                     typedExpression.Value = val;
                 }
             });
@@ -619,12 +619,12 @@ namespace GUI
                 Label = "Variable name: ",
                 GetValue = (expr) =>
                 {
-                    var typedExpression = expr as ExpressionVariableExists;
+                    var typedExpression = expr.Convert44 < ExpressionVariableExists>();
                     return typedExpression.VariableName;
                 },
                 SetValue = (expr, val) =>
                 {
-                    var typedExpression = expr as ExpressionVariableExists;
+                    var typedExpression = expr.Convert44 < ExpressionVariableExists>();
                     typedExpression.VariableName = val;
                 }
             });

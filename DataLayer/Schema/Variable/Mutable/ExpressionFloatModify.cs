@@ -119,7 +119,7 @@ namespace DataLayer.Schema.Variable.Mutable
 
         public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
         {
-            var typedExpr = (ExpressionFloatModify) expr;
+            var typedExpr = expr.Convert44<ExpressionFloatModify>();
 
             var variable = typedExpr._getValueFromWorldstate(typedExpr.VariableName, stateManager);
             var left = typedExpr._getValue(typedExpr.Left, stateManager);
