@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using DataLayer.Core;
 using DataLayer.Logic;
 using DataLayer.Schema.Validation;
 
@@ -117,7 +118,7 @@ namespace DataLayer.Schema.Variable.Mutable
             }
         }
 
-        public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
+        public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager, ICoreTranslator translator)
         {
             var typedExpr = expr.Convert44<ExpressionFloatModify>();
 

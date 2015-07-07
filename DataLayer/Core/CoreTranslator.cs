@@ -8,7 +8,7 @@ using DataLayer.Schema;
 
 namespace DataLayer.Core
 {
-    using TranslatorFuncType = Func<BoolExpandableExpression, IStateManager, bool>;
+    using TranslatorFuncType = Func<BoolExpandableExpression, IStateManager, ICoreTranslator, bool>;
     using CreatorFuncType = Func<BoolExpandableExpression>;
 
     public class CoreTranslator : ICoreTranslator
@@ -72,7 +72,7 @@ namespace DataLayer.Core
                 throw new NotRegisteredExpressionException(expr.Name);
             }
 
-            return translator(expr, stateManager);
+            return translator(expr, stateManager, this);
         }
 
         public T CreateInstance<T>(BoolExpandableExpression templ = null)

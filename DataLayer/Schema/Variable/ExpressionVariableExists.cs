@@ -1,4 +1,5 @@
-﻿using DataLayer.Logic;
+﻿using DataLayer.Core;
+using DataLayer.Logic;
 
 namespace DataLayer.Schema.Variable
 {
@@ -22,7 +23,7 @@ namespace DataLayer.Schema.Variable
             set { SimpleArgs[0] = value; }
         }
 
-        public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
+        public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager, ICoreTranslator translator)
         {
             var typedExpr = expr.Convert44<ExpressionVariableExists>();
             return stateManager.HasVariable(typedExpr.VariableName);

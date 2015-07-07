@@ -1,4 +1,5 @@
 ﻿using System;
+using DataLayer.Core;
 using DataLayer.Logic;
 using DataLayer.Schema.Validation;
 
@@ -55,7 +56,7 @@ namespace DataLayer.Schema.Variable
             OperType = operType;
         }
 
-        public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
+        public override bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager, ICoreTranslator translator)
         {
             var typedExpr = expr.Convert44<ExpressionStringCheck>();
 

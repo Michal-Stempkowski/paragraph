@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using DataLayer.Core;
 using DataLayer.Logic;
 
 namespace DataLayer.Schema
@@ -34,7 +35,7 @@ namespace DataLayer.Schema
             };
         }
 
-        public virtual bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager)
+        public virtual bool TranslateToBool(BoolExpandableExpression expr, IStateManager stateManager, ICoreTranslator translator)
         {
             throw new YouShouldUseProperTranslatorInsteadOfCallingThisFunctionDirectlyException();
         }
@@ -94,9 +95,9 @@ namespace DataLayer.Schema
 
     public class BoolExpandableExpressionImpl<T> : BoolExpandableExpression where T : BoolExpandableExpression, new()
     {
-        public static Func<BoolExpandableExpression, IStateManager, bool> GetBoolTranslator()
+        public static Func<BoolExpandableExpression, IStateManager, ICoreTranslator, bool> GetBoolTranslator()
         {
-            return (expr, stateManager) => new T().TranslateToBool(expr, stateManager);
+            return (expr, stateManager, coreTranslator) => new T().TranslateToBool(expr, stateManager, coreTranslator);
         }
         public static Func<BoolExpandableExpression> CreateInstance()
         {
