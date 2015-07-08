@@ -118,6 +118,7 @@ namespace GUI
 
         private bool ConfirmRoomDisposal()
         {
+            LoadFromGui();
             switch (GuiHelper.ShowPromptWindow("Do you want to save room?"))
             {
                 case DialogResult.Yes:
