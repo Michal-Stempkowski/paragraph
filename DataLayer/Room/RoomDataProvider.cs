@@ -30,7 +30,7 @@ namespace DataLayer.Room
                     Description = x.Description,
                     Destination = x.Destination,
                     Effect = (manager) => _translator.ExpandToBool(x.Effect, manager),
-                    IsVisible = _translator.ExpandToBool(x.Effect, stateManager)
+                    IsVisible = _translator.ExpandToBool(x.VisibilityRequirements, stateManager)
                 } as IDecision).ToList(),
             };
 

@@ -17,7 +17,7 @@ namespace DataLayer.Schema
                 .OrderBy(x => x.Key)
                 .Select(x => x.Value)
                 .Aggregate(true, (currentState, x) => currentState && 
-                    x.TranslateToBool(x, stateManager, translator));
+                    translator.ExpandToBool(x, stateManager));
         }
     }
 }

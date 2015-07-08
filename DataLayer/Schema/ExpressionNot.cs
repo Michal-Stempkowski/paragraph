@@ -15,7 +15,7 @@ namespace DataLayer.Schema
         {
             return !expr.Args
                 .OrderBy(x => x.Key)
-                .Select(x => x.Value.TranslateToBool(x.Value, stateManager, translator))
+                .Select(x => translator.ExpandToBool(x.Value, stateManager))
                 .First();
         }
     }
