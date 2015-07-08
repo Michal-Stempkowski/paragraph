@@ -1,7 +1,4 @@
-﻿using System;
-using System.Dynamic;
-using System.Linq;
-using DataLayer.Core;
+﻿using DataLayer.Core;
 using DataLayer.Logic;
 using DataLayer.Schema.Validation;
 

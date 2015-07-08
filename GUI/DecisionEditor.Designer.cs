@@ -63,7 +63,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(439, 388);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(684, 662);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // _descriptionLabel
@@ -72,7 +72,7 @@
             this._descriptionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._descriptionLabel.Location = new System.Drawing.Point(3, 0);
             this._descriptionLabel.Name = "_descriptionLabel";
-            this._descriptionLabel.Size = new System.Drawing.Size(103, 262);
+            this._descriptionLabel.Size = new System.Drawing.Size(165, 536);
             this._descriptionLabel.TabIndex = 0;
             this._descriptionLabel.Text = "Description:";
             this._descriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -81,9 +81,9 @@
             // 
             this._descriptionBox.AcceptsTab = true;
             this._descriptionBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._descriptionBox.Location = new System.Drawing.Point(112, 3);
+            this._descriptionBox.Location = new System.Drawing.Point(174, 3);
             this._descriptionBox.Name = "_descriptionBox";
-            this._descriptionBox.Size = new System.Drawing.Size(324, 256);
+            this._descriptionBox.Size = new System.Drawing.Size(507, 530);
             this._descriptionBox.TabIndex = 1;
             this._descriptionBox.Text = "";
             // 
@@ -91,9 +91,9 @@
             // 
             this._destinationLabel.AutoSize = true;
             this._destinationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._destinationLabel.Location = new System.Drawing.Point(3, 262);
+            this._destinationLabel.Location = new System.Drawing.Point(3, 536);
             this._destinationLabel.Name = "_destinationLabel";
-            this._destinationLabel.Size = new System.Drawing.Size(103, 26);
+            this._destinationLabel.Size = new System.Drawing.Size(165, 26);
             this._destinationLabel.TabIndex = 2;
             this._destinationLabel.Text = "Destination:";
             this._destinationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -101,18 +101,18 @@
             // _destinationBox
             // 
             this._destinationBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this._destinationBox.Location = new System.Drawing.Point(112, 265);
+            this._destinationBox.Location = new System.Drawing.Point(174, 539);
             this._destinationBox.Name = "_destinationBox";
-            this._destinationBox.Size = new System.Drawing.Size(324, 20);
+            this._destinationBox.Size = new System.Drawing.Size(507, 20);
             this._destinationBox.TabIndex = 3;
             // 
             // _visibilityRequiremensLabel
             // 
             this._visibilityRequiremensLabel.AutoSize = true;
             this._visibilityRequiremensLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._visibilityRequiremensLabel.Location = new System.Drawing.Point(3, 288);
+            this._visibilityRequiremensLabel.Location = new System.Drawing.Point(3, 562);
             this._visibilityRequiremensLabel.Name = "_visibilityRequiremensLabel";
-            this._visibilityRequiremensLabel.Size = new System.Drawing.Size(103, 50);
+            this._visibilityRequiremensLabel.Size = new System.Drawing.Size(165, 50);
             this._visibilityRequiremensLabel.TabIndex = 4;
             this._visibilityRequiremensLabel.Text = "Visibility Requirements:";
             this._visibilityRequiremensLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -121,9 +121,9 @@
             // 
             this._visibilityRequirementsButton.AutoSize = true;
             this._visibilityRequirementsButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._visibilityRequirementsButton.Location = new System.Drawing.Point(112, 291);
+            this._visibilityRequirementsButton.Location = new System.Drawing.Point(174, 565);
             this._visibilityRequirementsButton.Name = "_visibilityRequirementsButton";
-            this._visibilityRequirementsButton.Size = new System.Drawing.Size(324, 44);
+            this._visibilityRequirementsButton.Size = new System.Drawing.Size(507, 44);
             this._visibilityRequirementsButton.TabIndex = 5;
             this._visibilityRequirementsButton.Text = "Show";
             this._visibilityRequirementsButton.UseVisualStyleBackColor = true;
@@ -132,9 +132,9 @@
             // 
             this._effectLabel.AutoSize = true;
             this._effectLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._effectLabel.Location = new System.Drawing.Point(3, 338);
+            this._effectLabel.Location = new System.Drawing.Point(3, 612);
             this._effectLabel.Name = "_effectLabel";
-            this._effectLabel.Size = new System.Drawing.Size(103, 50);
+            this._effectLabel.Size = new System.Drawing.Size(165, 50);
             this._effectLabel.TabIndex = 6;
             this._effectLabel.Text = "Effect:";
             this._effectLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -143,9 +143,9 @@
             // 
             this._effectButton.AutoSize = true;
             this._effectButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._effectButton.Location = new System.Drawing.Point(112, 341);
+            this._effectButton.Location = new System.Drawing.Point(174, 615);
             this._effectButton.Name = "_effectButton";
-            this._effectButton.Size = new System.Drawing.Size(324, 44);
+            this._effectButton.Size = new System.Drawing.Size(507, 44);
             this._effectButton.TabIndex = 7;
             this._effectButton.Text = "Show";
             this._effectButton.UseVisualStyleBackColor = true;
@@ -155,9 +155,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 388);
+            this.ClientSize = new System.Drawing.Size(684, 662);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "DecisionEditor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DecisionEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DecisionEditor_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DecisionEditor_FormClosed);

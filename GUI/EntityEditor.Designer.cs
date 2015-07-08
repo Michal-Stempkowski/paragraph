@@ -182,6 +182,7 @@
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "EntityEditor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntityEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EntityEditor_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);

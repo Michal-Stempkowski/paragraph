@@ -78,19 +78,6 @@ namespace DataLayer.Schema
                     .Select(x => x.Value)) +
                 ")";
         }
-
-//        public T CreateInstance<T>()
-//            where T : BoolExpandableExpression, new()
-//        {
-//            var result = new T
-//            {
-//                SimpleArgs = new Dictionary<int, string>(SimpleArgs),
-//                Args = new Dictionary<int, BoolExpandableExpression>(Args)
-//            };
-//
-//
-//            return result;
-//        }
     }
 
     public class BoolExpandableExpressionImpl<T> : BoolExpandableExpression where T : BoolExpandableExpression, new()

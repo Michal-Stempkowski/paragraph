@@ -56,7 +56,7 @@
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.TableLayoutPanel.Size = new System.Drawing.Size(284, 262);
+            this.TableLayoutPanel.Size = new System.Drawing.Size(684, 662);
             this.TableLayoutPanel.TabIndex = 0;
             // 
             // typeLabel
@@ -74,7 +74,7 @@
             this.saveButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.saveButton.Location = new System.Drawing.Point(44, 3);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(237, 23);
+            this.saveButton.Size = new System.Drawing.Size(637, 23);
             this.saveButton.TabIndex = 1;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -85,9 +85,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(684, 662);
             this.Controls.Add(this.TableLayoutPanel);
             this.Name = "SimpleArgEditor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SimpleArgEditor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SimpleArgEditor_FormClosing);
             this.Shown += new System.EventHandler(this.SimpleArgEditor_Shown);

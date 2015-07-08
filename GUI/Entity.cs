@@ -78,7 +78,7 @@ namespace GUI
 
         private void _onClosing(object sender, FormClosingEventArgs e)
         {
-            switch (GuiHelper.ShowPromptWindow("Do yuo want to save game?"))
+            switch (GuiHelper.ShowPromptWindow("Do you want to save game?"))
             {
                 case DialogResult.Yes:
                     var path = GuiHelper.ShowSaveNewGameFileChooser();

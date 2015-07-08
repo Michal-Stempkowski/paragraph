@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DataLayer.Core;
 using DataLayer.Data;
@@ -39,17 +38,15 @@ namespace DataLayer.Room
 
         public void CreateIfNeeded(string destination)
         {
-            if (!_objectProvider.DoesExist(destination))
+            if (_objectProvider.DoesExist(destination)) return;
+            var emptyRoom = new RoomSchema
             {
-                var emptyRoom = new RoomSchema
-                {
-                    Decisions = new List<DecisionSchema>(),
-                    Description = "Enter room description",
-                    Name = "EnterName"
-                };
+                Decisions = new List<DecisionSchema>(),
+                Description = "Enter room description",
+                Name = "EnterName"
+            };
 
-                _objectProvider.WriteRoom(destination, emptyRoom);
-            }
+            _objectProvider.WriteRoom(destination, emptyRoom);
         }
 
         public RoomSchema LoadRoomSchema(string destination)

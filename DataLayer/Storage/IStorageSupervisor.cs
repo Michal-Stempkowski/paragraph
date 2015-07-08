@@ -1,6 +1,4 @@
-﻿using DataLayer.Schema;
-
-namespace DataLayer.Storage
+﻿namespace DataLayer.Storage
 {
     public interface IStorageSupervisor
     {

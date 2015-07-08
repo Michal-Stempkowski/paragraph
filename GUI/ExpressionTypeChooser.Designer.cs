@@ -91,6 +91,7 @@
             this.ClientSize = new System.Drawing.Size(352, 88);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ExpressionTypeChooser";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ExpressionTypeChooser";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

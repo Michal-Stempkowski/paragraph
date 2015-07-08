@@ -50,7 +50,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(260, 238);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(660, 638);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // _textLayout
@@ -66,7 +66,7 @@
             this._textLayout.RowCount = 2;
             this._textLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._textLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this._textLayout.Size = new System.Drawing.Size(257, 160);
+            this._textLayout.Size = new System.Drawing.Size(654, 560);
             this._textLayout.TabIndex = 0;
             // 
             // descriptionBox
@@ -82,7 +82,7 @@
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.ReadOnly = true;
             this.descriptionBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.descriptionBox.Size = new System.Drawing.Size(251, 154);
+            this.descriptionBox.Size = new System.Drawing.Size(648, 554);
             this.descriptionBox.TabIndex = 1;
             // 
             // decisionPanel
@@ -91,18 +91,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.decisionPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.decisionPanel.Location = new System.Drawing.Point(3, 169);
+            this.decisionPanel.Location = new System.Drawing.Point(3, 569);
             this.decisionPanel.Name = "decisionPanel";
-            this.decisionPanel.Size = new System.Drawing.Size(257, 66);
+            this.decisionPanel.Size = new System.Drawing.Size(654, 66);
             this.decisionPanel.TabIndex = 1;
             // 
             // Entity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(684, 662);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Entity";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Paragraph";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this._onClosing);
             this.Load += new System.EventHandler(this.Entity_Load);
