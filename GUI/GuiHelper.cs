@@ -62,5 +62,10 @@ namespace GUI
 
             return file.ShowDialog() == DialogResult.OK ? file.FileName : "";
         }
+
+        public static void ShowWarning(string error)
+        {
+            MessageBox.Show(error, Resources.GuiHelper_ShowWarning_warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 }

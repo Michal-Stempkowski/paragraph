@@ -43,11 +43,19 @@ namespace GUI
             {
                 button.Click += (sender, args) =>
                 {
-                    var decision = (sender as Button).Tag as IDecision;
-                    decision.Effect(_entityMenu.StateManager);
-                    _entityMenu.PerformTransition(decision.Destination);
+                    try
+                    {
+                        var decision = (sender as Button).Tag as IDecision;
+                        decision.Effect(_entityMenu.StateManager);
+                        _entityMenu.PerformTransition(decision.Destination);
 
-                    LoadEntityData();
+                        LoadEntityData();
+                    }
+                    catch (Exception ex)
+                    {
+                        GuiHelper.ShowWarning(ex.Message);
+                    }
+                    
                 };
                 decisionPanel.Controls.Add(button);
             }
@@ -74,7 +82,14 @@ namespace GUI
             {
                 case DialogResult.Yes:
                     var path = GuiHelper.ShowSaveNewGameFileChooser();
-                    _entityMenu.SaveGame(path);
+                    try
+                    {
+                        _entityMenu.SaveGame(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        GuiHelper.ShowWarning(ex.Message);
+                    }
                     break;
                 case DialogResult.No:
                     break;

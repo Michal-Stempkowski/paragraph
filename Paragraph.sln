@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{6417A17A-1554-43CE-B4E8-07F159BB6A7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{07488B26-797D-4352-8D49-65CCED60EAEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParagraphGame", "GUI\ParagraphGame.csproj", "{07488B26-797D-4352-8D49-65CCED60EAEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

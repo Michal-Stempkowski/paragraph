@@ -41,9 +41,17 @@ namespace GUI
 
         private void VisibilityRequirementsButtonOnClick(object sender, EventArgs eventArgs)
         {
-            GuiToDecision();
-            Decision.VisibilityRequirements = ShowExpressionEditor(Decision.VisibilityRequirements);
-            DecisionToGui();
+            try
+            {
+                GuiToDecision();
+                Decision.VisibilityRequirements = ShowExpressionEditor(Decision.VisibilityRequirements);
+                DecisionToGui();
+            }
+            catch (Exception ex)
+            {
+                GuiHelper.ShowWarning(ex.Message);
+            }
+           
         }
 
         private BoolExpandableExpression ShowExpressionEditor(BoolExpandableExpression expression)
@@ -77,7 +85,7 @@ namespace GUI
 
         private void DecisionEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //GuiToDecision();
+//            GuiToDecision();
         }
     }
 }

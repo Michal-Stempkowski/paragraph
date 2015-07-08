@@ -125,6 +125,15 @@ namespace GUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to warning.
+        /// </summary>
+        internal static string GuiHelper_ShowWarning_warning {
+            get {
+                return ResourceManager.GetString("GuiHelper_ShowWarning_warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string Main_EditorButton_Click_Error {

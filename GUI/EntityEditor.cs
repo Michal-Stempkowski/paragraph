@@ -83,7 +83,16 @@ namespace GUI
                 case Keys.Control:
                     if (ConfirmRoomDisposal())
                     {
-                        PerformGoto(decision.Destination);
+                        try
+                        {
+                            PerformGoto(decision.Destination);
+                        }
+                        catch (Exception ex)
+                        {
+                            GuiHelper.ShowWarning(ex.Message);
+                            
+                        }
+                        
                     }
                     break;
                 case Keys.Alt:
@@ -112,7 +121,15 @@ namespace GUI
             switch (GuiHelper.ShowPromptWindow("Do you want to save room?"))
             {
                 case DialogResult.Yes:
-                    _entityEditorMenu.SaveCurrentSchema();
+                    try
+                    {
+                        _entityEditorMenu.SaveCurrentSchema();
+                    }
+                    catch (Exception ex)
+                    {
+                        GuiHelper.ShowWarning(ex.Message);
+                    }
+                    
                     return true;
                 case DialogResult.No:
                     return true;

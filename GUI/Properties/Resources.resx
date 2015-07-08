@@ -145,4 +145,7 @@
   <data name="GuiHelper_save_files" xml:space="preserve">
     <value>Save files (*.state)|*.state</value>
   </data>
+  <data name="GuiHelper_ShowWarning_warning" xml:space="preserve">
+    <value>warning</value>
+  </data>
 </root>

@@ -90,7 +90,7 @@ namespace GUI
 
 //            var mainMenu = Substitute.For<IMainMenu>();\
 //            MessageBox.Show(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.Parent.Parent.FullName);
-            var storageSupervisor = new FileStorageSupervisor(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.Parent.Parent.Parent.FullName);
+            var storageSupervisor = new FileStorageSupervisor(@"C:\ParagraphGameData");
             var objectDataProvider = new JsonDaoProvider<StateManager>(storageSupervisor);
             var coreTranslator = new CoreTranslator();
             var roomDataProvider = new RoomDataProvider(objectDataProvider, coreTranslator);
